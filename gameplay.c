@@ -144,6 +144,20 @@ void generate_tetromino(Vector2* Tetromino, int scale, int x_offset, int y_offse
             (Tetromino+3)->y = 1*scale+y_offset;
             break;
     }
+}
 
+void rotation_rigthVector2(Vector2 * Tetromino, int scale, int x_offset, int y_offset){
+    /*
+     * Grundsätzliches Vorgehen für eine Drehung des Tetrominos um 90° nach rechts:
+     * Schritt 1: Die Blöcke als ganzes (Matrix) transponieren
+     * Schritt 2: Die Matrix der Blöcke invertieren
+     */
+}
 
+void rotation_left(Vector2 * Tetromino, int scale, int x_offset, int y_offset){
+    /*
+     * Grundsätzliches Vorgehen für eine Drehung des Tetrominos um 90° nach links:
+     * Schritt 1: Die Matrix der Blöcke invertieren
+     * Schritt 2: Die Blöcke als ganzes (Matrix) transponieren
+     */
 }
