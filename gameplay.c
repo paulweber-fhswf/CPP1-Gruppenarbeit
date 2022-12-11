@@ -62,16 +62,16 @@ void generate_tetromino(Vector2* Tetromino, int scale, int x_offset, int y_offse
 
         case 1:
             (Tetromino+0)->x = 0*scale+x_offset;
-            (Tetromino+0)->y = 0*scale+y_offset;
+            (Tetromino+0)->y = -1*scale+y_offset;
 
-            (Tetromino+1)->x = 1*scale+x_offset;
+            (Tetromino+1)->x = 0*scale+x_offset;
             (Tetromino+1)->y = 0*scale+y_offset;
 
-            (Tetromino+2)->x = 0*scale+x_offset;
-            (Tetromino+2)->y = 1*scale+y_offset;
+            (Tetromino+2)->x = 1*scale+x_offset;
+            (Tetromino+2)->y = 0*scale+y_offset;
 
-            (Tetromino+3)->x = 1*scale+x_offset;
-            (Tetromino+3)->y = 1*scale+y_offset;
+            (Tetromino+3)->x = 2*scale+x_offset;
+            (Tetromino+3)->y = 0*scale+y_offset;
             break;
 
         case 2:
@@ -81,10 +81,10 @@ void generate_tetromino(Vector2* Tetromino, int scale, int x_offset, int y_offse
             (Tetromino+1)->x = 1*scale+x_offset;
             (Tetromino+1)->y = 0*scale+y_offset;
 
-            (Tetromino+2)->x = 0*scale+x_offset;
-            (Tetromino+2)->y = 1*scale+y_offset;
+            (Tetromino+2)->x = 2*scale+x_offset;
+            (Tetromino+2)->y = 0*scale+y_offset;
 
-            (Tetromino+3)->x = 1*scale+x_offset;
+            (Tetromino+3)->x = 2*scale+x_offset;
             (Tetromino+3)->y = 1*scale+y_offset;
             break;
 
@@ -109,11 +109,11 @@ void generate_tetromino(Vector2* Tetromino, int scale, int x_offset, int y_offse
             (Tetromino+1)->x = 1*scale+x_offset;
             (Tetromino+1)->y = 0*scale+y_offset;
 
-            (Tetromino+2)->x = 0*scale+x_offset;
-            (Tetromino+2)->y = 1*scale+y_offset;
+            (Tetromino+2)->x = 1*scale+x_offset;
+            (Tetromino+2)->y = -1*scale+y_offset;
 
-            (Tetromino+3)->x = 1*scale+x_offset;
-            (Tetromino+3)->y = 1*scale+y_offset;
+            (Tetromino+3)->x = 2*scale+x_offset;
+            (Tetromino+3)->y = -1*scale+y_offset;
             break;
 
         case 5:
@@ -123,25 +123,25 @@ void generate_tetromino(Vector2* Tetromino, int scale, int x_offset, int y_offse
             (Tetromino+1)->x = 1*scale+x_offset;
             (Tetromino+1)->y = 0*scale+y_offset;
 
-            (Tetromino+2)->x = 0*scale+x_offset;
-            (Tetromino+2)->y = 1*scale+y_offset;
+            (Tetromino+2)->x = 1*scale+x_offset;
+            (Tetromino+2)->y = -1*scale+y_offset;
 
-            (Tetromino+3)->x = 1*scale+x_offset;
-            (Tetromino+3)->y = 1*scale+y_offset;
+            (Tetromino+3)->x = 2*scale+x_offset;
+            (Tetromino+3)->y = 0*scale+y_offset;
             break;
 
         case 6:
             (Tetromino+0)->x = 0*scale+x_offset;
-            (Tetromino+0)->y = 0*scale+y_offset;
+            (Tetromino+0)->y = -1*scale+y_offset;
 
             (Tetromino+1)->x = 1*scale+x_offset;
-            (Tetromino+1)->y = 0*scale+y_offset;
+            (Tetromino+1)->y = -1*scale+y_offset;
 
-            (Tetromino+2)->x = 0*scale+x_offset;
-            (Tetromino+2)->y = 1*scale+y_offset;
+            (Tetromino+2)->x = 1*scale+x_offset;
+            (Tetromino+2)->y = 0*scale+y_offset;
 
-            (Tetromino+3)->x = 1*scale+x_offset;
-            (Tetromino+3)->y = 1*scale+y_offset;
+            (Tetromino+3)->x = 2*scale+x_offset;
+            (Tetromino+3)->y = 0*scale+y_offset;
             break;
     }
 
