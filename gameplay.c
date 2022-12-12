@@ -149,7 +149,7 @@ void generate_tetromino(Vector2* Tetromino, int scale, int x_offset, int y_offse
 
 // Hilfsfunktion für das transponieren:
 void tausch(int* l_operand, int* r_operand){
-    int puffer = *l_operand;it 
+    int puffer = *l_operand;
     *l_operand = *r_operand;
     *r_operand = puffer;
 }
