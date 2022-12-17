@@ -5,7 +5,7 @@
 #ifndef TETRIS_GAMEPLAY_H
 #define TETRIS_GAMEPLAY_H
 
-#include <raylib.h>
+#include "include/raylib.h"
 
 #include <stdlib.h>
 
@@ -14,8 +14,8 @@ void generate_tetromino(Vector2* Tetromino, int scale, int x_offset, int y_offse
 
 // + Behelfsfunktion swap()
 void swap(int* l_operand, int* r_operand);
-void rotation_right(Vector2 * Tetromino, int scale, int x_offset, int y_offset);
-void rotation_left(Vector2 * Tetromino, int scale, int x_offset, int y_offset);
+void rotation_right(Vector2 * Tetromino);
+void rotation_left(Vector2 * Tetromino);
 
 
 

@@ -2,7 +2,7 @@
 // Created by Paul Weber on 27.11.22.
 //
 
-#include <raylib.h>
+#include "include/raylib.h"
 #include <stdlib.h>
 #include "output.h"
 #include "input.h"
