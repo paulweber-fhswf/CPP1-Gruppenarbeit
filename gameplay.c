@@ -33,7 +33,7 @@ void generate_tetromino(Vector2* Tetromino, int scale, int x_offset, int y_offse
 
     int Type;
 
-    Type = 0;//rand()%7;
+    Type = rand()%7;
 
     switch (Type) {
         case 0:
@@ -61,89 +61,166 @@ void generate_tetromino(Vector2* Tetromino, int scale, int x_offset, int y_offse
 
 
         case 1:
-            (Tetromino+0)->x = 0*scale+x_offset;
-            (Tetromino+0)->y = 0*scale+y_offset;
 
-            (Tetromino+1)->x = 1*scale+x_offset;
-            (Tetromino+1)->y = 0*scale+y_offset;
+            /*          Type J
+             *
+             *          ####
+             *          ####
+             *          ####
+             *
+             *          #### #### ####
+             *          #### #### ####
+             *          #### #### ####
+             *
+             */
 
-            (Tetromino+2)->x = 0*scale+x_offset;
-            (Tetromino+2)->y = 1*scale+y_offset;
+            (Tetromino+0)->x = 3*scale+x_offset;
+            (Tetromino+0)->y = -2*scale+y_offset;
 
-            (Tetromino+3)->x = 1*scale+x_offset;
-            (Tetromino+3)->y = 1*scale+y_offset;
+            (Tetromino+1)->x = 3*scale+x_offset;
+            (Tetromino+1)->y = -1*scale+y_offset;
+
+            (Tetromino+2)->x = 4*scale+x_offset;
+            (Tetromino+2)->y = -1*scale+y_offset;
+
+            (Tetromino+3)->x = 5*scale+x_offset;
+            (Tetromino+3)->y = -1*scale+y_offset;
             break;
 
         case 2:
-            (Tetromino+0)->x = 0*scale+x_offset;
-            (Tetromino+0)->y = 0*scale+y_offset;
 
-            (Tetromino+1)->x = 1*scale+x_offset;
-            (Tetromino+1)->y = 0*scale+y_offset;
+            /*          Type L
+             *
+             *                    ####
+             *                    ####
+             *                    ####
+             *
+             *          #### #### ####
+             *          #### #### ####
+             *          #### #### ####
+             *
+             */
 
-            (Tetromino+2)->x = 0*scale+x_offset;
-            (Tetromino+2)->y = 1*scale+y_offset;
+            (Tetromino+0)->x = 3*scale+x_offset;
+            (Tetromino+0)->y = -1*scale+y_offset;
 
-            (Tetromino+3)->x = 1*scale+x_offset;
-            (Tetromino+3)->y = 1*scale+y_offset;
+            (Tetromino+1)->x = 4*scale+x_offset;
+            (Tetromino+1)->y = -1*scale+y_offset;
+
+            (Tetromino+2)->x = 5*scale+x_offset;
+            (Tetromino+2)->y = -1*scale+y_offset;
+
+            (Tetromino+3)->x = 5*scale+x_offset;
+            (Tetromino+3)->y = -2*scale+y_offset;
             break;
 
         case 3:
-            (Tetromino+0)->x = 0*scale+x_offset;
-            (Tetromino+0)->y = 0*scale+y_offset;
 
-            (Tetromino+1)->x = 1*scale+x_offset;
-            (Tetromino+1)->y = 0*scale+y_offset;
+            /*          Type O
+             *
+             *        #### ####
+             *        #### ####
+             *        #### ####
+             *
+             *        #### ####
+             *        #### ####
+             *        #### ####
+             *
+             */
 
-            (Tetromino+2)->x = 0*scale+x_offset;
-            (Tetromino+2)->y = 1*scale+y_offset;
+            (Tetromino+0)->x = 4*scale+x_offset;
+            (Tetromino+0)->y = -2*scale+y_offset;
 
-            (Tetromino+3)->x = 1*scale+x_offset;
-            (Tetromino+3)->y = 1*scale+y_offset;
+            (Tetromino+1)->x = 5*scale+x_offset;
+            (Tetromino+1)->y = -2*scale+y_offset;
+
+            (Tetromino+2)->x = 4*scale+x_offset;
+            (Tetromino+2)->y = -1*scale+y_offset;
+
+            (Tetromino+3)->x = 5*scale+x_offset;
+            (Tetromino+3)->y = -1*scale+y_offset;
             break;
 
         case 4:
-            (Tetromino+0)->x = 0*scale+x_offset;
-            (Tetromino+0)->y = 0*scale+y_offset;
 
-            (Tetromino+1)->x = 1*scale+x_offset;
-            (Tetromino+1)->y = 0*scale+y_offset;
+            /*          Type S
+             *
+             *             #### ####
+             *             #### ####
+             *             #### ####
+             *
+             *        #### ####
+             *        #### ####
+             *        #### ####
+             *
+             */
 
-            (Tetromino+2)->x = 0*scale+x_offset;
-            (Tetromino+2)->y = 1*scale+y_offset;
+            (Tetromino+0)->x = 3*scale+x_offset;
+            (Tetromino+0)->y = -1*scale+y_offset;
 
-            (Tetromino+3)->x = 1*scale+x_offset;
-            (Tetromino+3)->y = 1*scale+y_offset;
+            (Tetromino+1)->x = 4*scale+x_offset;
+            (Tetromino+1)->y = -1*scale+y_offset;
+
+            (Tetromino+2)->x = 4*scale+x_offset;
+            (Tetromino+2)->y = -2*scale+y_offset;
+
+            (Tetromino+3)->x = 5*scale+x_offset;
+            (Tetromino+3)->y = -2*scale+y_offset;
             break;
 
         case 5:
-            (Tetromino+0)->x = 0*scale+x_offset;
-            (Tetromino+0)->y = 0*scale+y_offset;
 
-            (Tetromino+1)->x = 1*scale+x_offset;
-            (Tetromino+1)->y = 0*scale+y_offset;
+             /*          Type T
+              *
+              *             ####
+              *             ####
+              *             ####
+              *
+              *        #### #### ####
+              *        #### #### ####
+              *        #### #### ####
+              *
+              */
 
-            (Tetromino+2)->x = 0*scale+x_offset;
-            (Tetromino+2)->y = 1*scale+y_offset;
+            (Tetromino+0)->x = 3*scale+x_offset;
+            (Tetromino+0)->y = -1*scale+y_offset;
 
-            (Tetromino+3)->x = 1*scale+x_offset;
-            (Tetromino+3)->y = 1*scale+y_offset;
+            (Tetromino+1)->x = 4*scale+x_offset;
+            (Tetromino+1)->y = -1*scale+y_offset;
+
+            (Tetromino+2)->x = 4*scale+x_offset;
+            (Tetromino+2)->y = -2*scale+y_offset;
+
+            (Tetromino+3)->x = 5*scale+x_offset;
+            (Tetromino+3)->y = -1*scale+y_offset;
             break;
 
         case 6:
-            (Tetromino+0)->x = 0*scale+x_offset;
-            (Tetromino+0)->y = 0*scale+y_offset;
 
-            (Tetromino+1)->x = 1*scale+x_offset;
-            (Tetromino+1)->y = 0*scale+y_offset;
 
-            (Tetromino+2)->x = 0*scale+x_offset;
-            (Tetromino+2)->y = 1*scale+y_offset;
+            /*          Type Z
+             *
+             *         #### ####
+             *         #### ####
+             *         #### ####
+             *
+             *              #### ####
+             *              #### ####
+             *              #### ####
+             *
+             */
 
-            (Tetromino+3)->x = 1*scale+x_offset;
-            (Tetromino+3)->y = 1*scale+y_offset;
+            (Tetromino+0)->x = 3*scale+x_offset;
+            (Tetromino+0)->y = -2*scale+y_offset;
+
+            (Tetromino+1)->x = 4*scale+x_offset;
+            (Tetromino+1)->y = -2*scale+y_offset;
+
+            (Tetromino+2)->x = 4*scale+x_offset;
+            (Tetromino+2)->y = -1*scale+y_offset;
+
+            (Tetromino+3)->x = 5*scale+x_offset;
+            (Tetromino+3)->y = -1*scale+y_offset;
             break;
     }
-
-
 }
