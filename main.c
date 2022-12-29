@@ -9,12 +9,6 @@
 #include "gameplay.h"
 #include <time.h>
 
-
-#define x_offset 300
-#define y_offset 10
-#define scale 20
-
-
 int main()
 {
     srand(time(NULL));
@@ -29,20 +23,44 @@ int main()
     Vector2 *next_Tetromino = (Vector2*) malloc (4* sizeof(Vector2));
 
 
-    generate_tetromino(next_Tetromino, scale, x_offset, y_offset);
-    generate_tetromino(current_Tetromino, scale, x_offset, y_offset);
+    generate_tetromino(current_Tetromino);
+
+    generate_tetromino(current_Tetromino);
+    generate_tetromino(next_Tetromino);
 
     // Main game loop
     while (!WindowShouldClose())
     {
-        player_1(current_Tetromino, scale, x_offset, y_offset);
+        bool check = false;
+
+        player_1(current_Tetromino);
+        check = drop_pice_1(current_Tetromino);
 
 
         BeginDrawing();
+
         //Hintergrund
         ClearBackground(DARKGRAY);
-        draw_output(current_Tetromino, scale, x_offset, y_offset);
-        show_next_tetromino(next_Tetromino, scale, x_offset, y_offset);
+        draw_output(current_Tetromino);
+        show_next_tetromino(next_Tetromino);
+
+        if(check == true){
+            DrawText("Colision", 10, 50, 20, PURPLE);
+
+            for (int i = 0; i < 4; ++i) {
+                (current_Tetromino+i)->y = (next_Tetromino+i)->y;
+                (current_Tetromino+i)->x = (next_Tetromino+i)->x;
+            }
+
+
+            generate_tetromino(next_Tetromino);
+
+
+
+
+        }
+
+
         EndDrawing();
     }
 

@@ -7,7 +7,7 @@
 
 #include <raylib.h>
 
-void draw_output(Vector2* Tetromino, int scale, int x_offset, int y_offset);
-void show_next_tetromino(Vector2* Tetromino, int scale, int x_offset, int y_offset);
+void draw_output(Vector2* Tetromino);
+void show_next_tetromino(Vector2* Tetromino);
 
 #endif //TETRIS_OUTPUT_H
