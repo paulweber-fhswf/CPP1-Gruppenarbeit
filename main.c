@@ -13,6 +13,7 @@ int main()
 {
     srand(time(NULL));
 
+    int end = 0;
     const int screenWidth = 800;
     const int screenHeight = 450;
 
@@ -35,7 +36,7 @@ int main()
     generate_tetromino(next_Tetromino);
 
     // Main game loop
-    while (!WindowShouldClose())
+    while (!WindowShouldClose() && end == 0)
     {
         bool check = false;
 
@@ -61,6 +62,13 @@ int main()
                 (current_Tetromino+i)->x = (next_Tetromino+i)->x;
             }
             generate_tetromino(next_Tetromino);
+
+
+            for (int x = 0; x < 10; ++x) {
+                if(*(playfield+x+19*10)  == 1){
+                    end = 1;
+                }
+            }
 
         }
 
