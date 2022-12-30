@@ -58,6 +58,8 @@ int main()
             for (int i = 0; i < 4; ++i) {
                 *(playfield + (int)(current_Tetromino+i)->x + (int)((current_Tetromino+i)->y+20) * 10) = 1;
 
+                clear_line(current_Tetromino, playfield);
+
                 (current_Tetromino+i)->y = (next_Tetromino+i)->y;
                 (current_Tetromino+i)->x = (next_Tetromino+i)->x;
             }
@@ -71,6 +73,8 @@ int main()
             }
 
         }
+
+
 
         draw_playfield(playfield);
 

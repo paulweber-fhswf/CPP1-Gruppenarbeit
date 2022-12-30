@@ -39,7 +39,7 @@ void generate_tetromino(Vector2* Tetromino){
 
     int Type;
 
-    Type = rand()%7;
+    Type = 3; //rand()%7;
 
     switch (Type) {
         case 0:
@@ -268,4 +268,46 @@ bool drop_pice_1(Vector2 *current_Tetromino, int *playfield){
     else{
         return false;
     }
+}
+
+int clear_line(Vector2 *current_Tetromino, int *playfield){
+
+    int lines[] = {-1, -1, -1, -1};
+    int clear;
+
+
+
+    for (int i = 0; i < 4; ++i) {
+
+        clear = 0;
+
+        for(int x = 0; x < 10; ++x) {
+            if ( *(playfield +x+ ((int)(current_Tetromino+i)->y +20) *10) == 1){
+                clear++;
+            }
+        }
+
+        if (clear >= 10){
+            DrawText("CLEAR LINE", 100, 10, 20, GREEN);
+
+            for(int x = 0; x < 10; ++x) {
+                *(playfield +x+ ((int)(current_Tetromino+i)->y +20) *10) = 0;
+            }
+
+            for (int j = (int)(current_Tetromino+i)->y+20; j > 0; --j) {
+                for(int x = 0; x < 10; ++x) {
+                   *(playfield +x+ (j) *10) = *(playfield +x+ (j-1) *10);
+                }
+            }
+            
+        }
+
+
+
+    }
+
+
+
+
+    return 0;
 }

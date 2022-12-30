@@ -37,6 +37,9 @@ void draw_playfield(int *playfield){
             if(*(playfield+x+y*10) == 1){
                 DrawRectangle(x * scale +x_offset , (y-20) * scale +y_offset , scale, scale, PURPLE);
             }
+            if(*(playfield+x+y*10) == 2){
+                DrawRectangle(x * scale +x_offset , (y-20) * scale +y_offset , scale, scale, GREEN);
+            }
         }
     }
 }
