@@ -9,5 +9,6 @@
 
 void draw_output(Vector2* Tetromino);
 void show_next_tetromino(Vector2* Tetromino);
+void draw_playfield(int *playfield);
 
 #endif //TETRIS_OUTPUT_H

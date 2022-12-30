@@ -6,7 +6,7 @@
 #define TETRIS_INPUT_H
 #include <raylib.h>
 
-void player_1(Vector2* Tetromino);
+void player_1(Vector2* Tetromino, int *playfield);
 
 
 #endif //TETRIS_INPUT_H

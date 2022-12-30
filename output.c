@@ -30,3 +30,13 @@ void show_next_tetromino(Vector2* Tetromino){
         DrawRectangle((Tetromino+i)->x * scale , (Tetromino+i)->y * scale + 100, scale, scale, BLUE);
     }
 }
+
+void draw_playfield(int *playfield){
+    for (int x = 0; x < 10; ++x) {
+        for (int y = 0; y < 40; ++y) {
+            if(*(playfield+x+y*10) == 1){
+                DrawRectangle(x * scale +x_offset , (y-20) * scale +y_offset , scale, scale, PURPLE);
+            }
+        }
+    }
+}

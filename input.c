@@ -5,7 +5,7 @@
 #include "input.h"
 #include "gameplay.h"
 
-void player_1(Vector2* Tetromino){
+void player_1(Vector2* Tetromino, int *playfield){
     int x_dif = 0;
     int y_dif = 0;
 
@@ -27,5 +27,5 @@ void player_1(Vector2* Tetromino){
         y_dif = 1;
     }
 
-    move_tetromino(Tetromino, x_dif, y_dif);
+    move_tetromino(Tetromino, x_dif, y_dif, playfield);
 }

@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 
-void move_tetromino(Vector2* Tetromino, double x_dif, double y_dif){
+void move_tetromino(Vector2* Tetromino, double x_dif, double y_dif, int *playfield){
     int check = 0;
 
     //Überprüfe, ob der Tetromino an die neue Stelle passt, wenn nicht, wird check auf 1 gesetzt und der Schritt der Koordinatenanpassung wird übersprungen
@@ -16,6 +16,10 @@ void move_tetromino(Vector2* Tetromino, double x_dif, double y_dif){
             check = 1;
         }
         if((Tetromino+i)->y +y_dif >= 20 ){
+            check = 1;
+        }
+
+        if(*(playfield + (int)((Tetromino+i)->x + x_dif) + (int)(((Tetromino+i)->y + 20 +y_dif) * 10))){
             check = 1;
         }
     }
@@ -227,7 +231,7 @@ void generate_tetromino(Vector2* Tetromino){
     }
 }
 
-bool drop_pice_1(Vector2 *current_Tetromino){
+bool drop_pice_1(Vector2 *current_Tetromino, int *playfield){
 
     int check = 0;
 
@@ -242,6 +246,10 @@ bool drop_pice_1(Vector2 *current_Tetromino){
         if((check_Tetromino+i)->y >= 20){
             check = 1;
         }
+
+        if(*(playfield + (int)(check_Tetromino+i)->x + (int)((check_Tetromino+i)->y+20) * 10) == 1){
+            check = 1;
+        }
     }
 
 
@@ -253,8 +261,6 @@ bool drop_pice_1(Vector2 *current_Tetromino){
             (current_Tetromino+i)->x = (check_Tetromino+i)->x;
         }
     }
-
-    //WaitTime(0.5);
 
     if(check == 1){
         return true;
