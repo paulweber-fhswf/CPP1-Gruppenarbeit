@@ -5,12 +5,16 @@
 #include "input.h"
 #include "gameplay.h"
 
-void player_1(Vector2* Tetromino, int *playfield){
-    int x_dif = 0;
-    int y_dif = 0;
+//Funktion um die Eingaben des ersten Spielers einzulesen
+//Autor: Paul Weber
+void player_1(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
+              int *playfield // Array mit den liegenden Blöcken
+              ){
 
-    // Update
-    //----------------------------------------------------------------------------------
+    int x_dif = 0, y_dif = 0; // Variablen für die X und Y unterschiede
+
+    //Einlesen der Tastatur: abhängig von der gedrückten Taste, wird der Tetromino um 1 verschoben
+
     if (IsKeyDown(KEY_RIGHT)){
         x_dif = 1;
     }
@@ -27,5 +31,5 @@ void player_1(Vector2* Tetromino, int *playfield){
         y_dif = 1;
     }
 
-    move_tetromino(Tetromino, x_dif, y_dif, playfield);
+    move_tetromino(Tetromino, x_dif, y_dif, playfield); //Die X bzw. Y Differenz an die bewegen Funktion geben
 }
