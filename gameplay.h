@@ -14,8 +14,7 @@ void generate_tetromino(Vector2* Tetromino, int scale, int x_offset, int y_offse
 
 // + Behelfsfunktion swap()
 void swap(int* l_operand, int* r_operand);
-void rotation_right(Vector2 * Tetromino);
-void rotation_left(Vector2 * Tetromino);
+void rotation(Vector2 * Tetromino);
 
 
 

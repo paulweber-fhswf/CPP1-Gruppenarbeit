@@ -148,13 +148,13 @@ void generate_tetromino(Vector2* Tetromino, int scale, int x_offset, int y_offse
 
 
 // Hilfsfunktion für das transponieren:
-void tausch(int* l_operand, int* r_operand){
+void swap(int* l_operand, int* r_operand){
     int puffer = *l_operand;
     *l_operand = *r_operand;
     *r_operand = puffer;
 }
 
-void rotation_right(Vector2 * Tetromino){
+void rotation(Vector2 * Tetromino){
     /*
      * Grundsätzliches Vorgehen für eine Drehung des Tetrominos um 90° nach rechts:
      * Schritt 1: Die Blöcke als ganzes (Matrix) transponieren
@@ -186,43 +186,6 @@ void rotation_right(Vector2 * Tetromino){
     for (int i = 0; i < 4; i++){
         for (int j = 4; j >= 0 ; j--){
             matrix[i][i] = matrix[j][j];
-        }
-    }
-
-    // Als letzten Schritt: Die Daten aus dem 'matrix'-Array wieder in den Tetromino schreiben:
-    for(int i = 0; i < 4; i++){
-        (Tetromino+i)->x = matrix[i][0];
-        (Tetromino+i)->y = matrix[0][i];
-    }
-}
-
-void rotation_left(Vector2 * Tetromino){
-    /*
-     * Grundsätzliches Vorgehen für eine Drehung des Tetrominos um 90° nach links:
-     * Schritt 1: Die Matrix der Blöcke invertieren
-     * Schritt 2: Die Blöcke als ganzes (Matrix) transponieren
-     */
-
-    // (Erklärung zur Martix siehe 'rotation_left')
-    int matrix[4][4];
-
-    // Den aktuellen Tetromino in ein 2D-Array kopieren
-    for(int i = 0; i < 4; i++){
-        matrix[i][0] = (Tetromino+i)->x;
-        matrix[0][i] = (Tetromino+i)->y;
-    }
-
-    // Schritt 1: Die 'matrix' invertieren:
-    for (int i = 0; i < 4; i++){
-        for (int j = 4; j >= 0; j--){
-            matrix[i][i] = matrix[j][j];
-        }
-    }
-
-    // Schritt 2: Die Matrix transponieren:
-    for(int i = 0; i < 4; i++){
-        for (int j = i+1; j < 4; j++){
-            swap(&(matrix[i][j]), &(matrix[j][i]));
         }
     }
 
