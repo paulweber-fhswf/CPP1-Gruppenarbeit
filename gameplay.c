@@ -55,7 +55,7 @@ void generate_tetromino(Vector2* Tetromino //Vector Array mit den 4 Blöcken des
 
     int Type;
 
-    Type = rand()%7;
+    Type = GetRandomValue(0,6);
 
     switch (Type) {
         case 0:

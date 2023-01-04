@@ -7,13 +7,11 @@
 #include "output.h"
 #include "input.h"
 #include "gameplay.h"
-#include <time.h>
 
 //Aufrufen der Spiellogiken
 //Autor: Paul Weber
 int main()
 {
-    srand(time(NULL)); //Zufallszahlen initialisieren
 
     //Konfiguration für das Spielfenster
     const int screenWidth = 800;
