@@ -50,9 +50,10 @@ int main()
         //Hintergrund
         ClearBackground(DARKGRAY);
 
-        //Spielfeld und den aktuellen Tetomino ausgeben
+        //Spielfeld, den aktuellen Tetomino und weitere Spielfeldparameter ausgeben
         draw_output(current_Tetromino);
         show_next_tetromino(next_Tetromino);
+        draw_completed_lines();
 
         //Wenn der Tetromino mit einem Block oder den Boden kollidiert
         if(check == true){

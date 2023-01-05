@@ -3,8 +3,11 @@
 //
 
 #include "gameplay.h"
-#include "raylib.h"
+#include <raylib.h>
 #include <stdlib.h>
+
+// Initialisierende, globale Variablen:
+int completed_lines = 0;
 
 //Funktion um den Tetromino in die x bzw y Richtung zu verschieben
 //Autor: Paul Weber
@@ -299,9 +302,9 @@ bool drop_pice_1(Vector2 *current_Tetromino, //Vector Array mit den 4 Blöcken d
     }
 }
 
-//Funktion um eine vollständige Reihe aufzulösen
+//Funktion um eine vollständige Reihe aufzulösen (+inkrementieren des Zählers für vollständigen Linien)
 //Rückgabe: ------- Kommt noch
-//Autor: Paul Weber
+//Autor: Paul Weber, Florian Bruchhage
 int clear_line(Vector2 *current_Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
                int *playfield // Array mit den liegenden Blöcken
                ){
@@ -334,9 +337,17 @@ int clear_line(Vector2 *current_Tetromino, //Vector Array mit den 4 Blöcken des
                    *(playfield +x+ (j) *10) = *(playfield +x+ (j-1) *10);
                 }
             }
+            //Zähler für vollständige Linien inkrementieren
+            completed_lines++;
         }
 
     }
 
     return 0;
+}
+
+//Funktion zum Darstellen des Zählers für vollständige Linen
+//Autor: Florian Bruchhage
+void draw_completed_lines(){
+    DrawText(TextFormat("FERTIGE LINIEN:  %4i", completed_lines), 300, 30, 10, GREEN);
 }

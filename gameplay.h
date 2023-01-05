@@ -29,12 +29,16 @@ bool drop_pice_1(Vector2 *current_Tetromino, //Vector Array mit den 4 Blöcken d
                  int *playfield // Array mit den liegenden Blöcken
 );
 
-//Funktion um eine vollständige Reihe aufzulösen
+//Funktion um eine vollständige Reihe aufzulösen (+inkrementieren des Zählers für vollständigen Linien)
 //Rückgabe: ------- Kommt noch
-//Autor: Paul Weber
+//Autor: Paul Weber, Florian Bruchhage
 int clear_line(Vector2 *current_Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
                int *playfield // Array mit den liegenden Blöcken
 );
+
+//Funktion zum Darstellen des Zählers für vollständige Linen
+//Autor: Florian Bruchhage
+void draw_completed_lines();
 
 
 #endif //TETRIS_GAMEPLAY_H
