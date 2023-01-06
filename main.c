@@ -39,8 +39,14 @@ int main()
     bool check = false;
 
     //Game loop solange laufen lassen, bis das Fenster geschlossen wird oder das Spiel zu Ende geht
-    while (!WindowShouldClose() && end == 0)
+    while (!WindowShouldClose())
     {
+        // Fall: GAME OVER
+        if (end == 1){
+            draw_game_over();
+            return 0;
+        }
+
         player_1(current_Tetromino, playfield); //Eingabe Spieler 1 lesen
         check = drop_pice_1(current_Tetromino, playfield); //Tetromino 1 Block fallen lassen
 

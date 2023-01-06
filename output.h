@@ -22,4 +22,8 @@ void show_next_tetromino(Vector2* Tetromino //Vector Array mit den 4 Blöcken de
 void draw_playfield(int *playfield // Array mit den liegenden Blöcken
 );
 
+//Funktion zum Darstellen eines GameOver Screens
+//Autor: Florian Bruchhage
+void draw_game_over();
+
 #endif //TETRIS_OUTPUT_H

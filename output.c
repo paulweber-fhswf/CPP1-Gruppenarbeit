@@ -53,3 +53,12 @@ void draw_playfield(int *playfield // Array mit den liegenden Blöcken
         }
     }
 }
+
+//Funktion zum Darstellen eines GameOver Screens
+//Autor: Florian Bruchhage
+void draw_game_over(){
+    BeginDrawing();
+    DrawText("GAME OVER", 340, 10, 20, WHITE);
+    EndDrawing();
+    WaitTime(3.0);
+}
