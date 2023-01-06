@@ -45,7 +45,8 @@ void move_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Te
         }
     }
 
-    WaitTime(0.05);
+    // Gibt an, wie schnell der Tetromino fällt (mögliche Erweiterung: Schwierigkeitsgrad)
+    WaitTime(0.1);
 }
 
 
@@ -349,5 +350,5 @@ int clear_line(Vector2 *current_Tetromino, //Vector Array mit den 4 Blöcken des
 //Funktion zum Darstellen des Zählers für vollständige Linen
 //Autor: Florian Bruchhage
 void draw_completed_lines(){
-    DrawText(TextFormat("FERTIGE LINIEN:  %4i", completed_lines), 300, 30, 10, GREEN);
+    DrawText(TextFormat("FERTIGE LINIEN:\n       %4i", completed_lines), 580, 10, 20, GREEN);
 }

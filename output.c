@@ -23,7 +23,7 @@ void draw_output(Vector2* Tetromino //Vector Array mit den 4 Blöcken des Tetrom
 //Autor: Paul Weber
 void show_next_tetromino(Vector2* Tetromino //Vector Array mit den 4 Blöcken des Tetrominos
 ){
-    DrawText("Next Piece", 10, 10, 20, BLUE);
+    DrawText("Next Piece:", 10, 10, 20, BLUE);
 
     for (int i = 0; i < 4; ++i) {
         DrawRectangle((Tetromino+i)->x * scale , (Tetromino+i)->y * scale + 100, scale, scale, BLUE);
