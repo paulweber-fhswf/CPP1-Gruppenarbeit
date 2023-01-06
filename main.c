@@ -44,7 +44,7 @@ int main()
         // Fall: GAME OVER
         if (end == 1){
             draw_game_over();
-            return 0;
+            break;
         }
 
         player_1(current_Tetromino, playfield); //Eingabe Spieler 1 lesen
