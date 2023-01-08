@@ -48,7 +48,7 @@ void draw_output(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetro
         }
     }
 
-    DrawText(TextFormat("x: %f, y: %f", Rotation_Point->x, Rotation_Point->y), 340, 10, 20, WHITE);
+    DrawText(TextFormat("x: %f, y: %f", Rotation_Point->x, Rotation_Point->y), 540, 310, 20, WHITE);
 
     DrawCircle(Rotation_Point->x * scale  + x_offset  , Rotation_Point->y * scale + y_offset, 5,  WHITE);
 }
