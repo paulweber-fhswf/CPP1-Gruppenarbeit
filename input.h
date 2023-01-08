@@ -6,7 +6,11 @@
 #define TETRIS_INPUT_H
 #include <raylib.h>
 
-void player_1(Vector2* Tetromino, int scale, int x_offset, int y_offset);
+//Funktion um die Eingaben des ersten Spielers einzulesen
+//Autor: Paul Weber
+void player_1(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
+              int *playfield // Array mit den liegenden Blöcken
+);
 
 
 #endif //TETRIS_INPUT_H
