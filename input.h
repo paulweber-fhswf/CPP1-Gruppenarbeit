@@ -9,6 +9,7 @@
 //Funktion um die Eingaben des ersten Spielers einzulesen
 //Autor: Paul Weber
 void player_1(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
+              Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
               int *playfield // Array mit den liegenden Blöcken
 );
 

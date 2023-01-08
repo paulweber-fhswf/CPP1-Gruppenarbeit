@@ -6,12 +6,13 @@
 #define TETRIS_GAMEPLAY_H
 
 #include <raylib.h>
-
 #include <stdlib.h>
 
 //Funktion um den Tetromino in die x bzw y Richtung zu verschieben
 //Autor: Paul Weber
 void move_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
+
+                    Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
                     double x_dif, // X Verschiebung
                     double y_dif, // Y Verschiebung
                     int *playfield // Array mit den liegenden Blöcken
@@ -19,13 +20,19 @@ void move_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Te
 
 //Funktion um einen Zufälligen Tetronimino an der richtigen Stelle zu platzieren
 //Autor: Steffanie Wille, Paul Weber
-void generate_tetromino(Vector2* Tetromino //Vector Array mit den 4 Blöcken des Tetrominos
+
+void generate_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
+                        Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
+                        int *type //Typ des Tetrominos
 );
 
 //Funktion um ein Tetromino einen Block fallen zu lassen
 //Rückgabe: true bei Kollision, false bei nicht Kollision
 //Autor: Paul Weber
 bool drop_pice_1(Vector2 *current_Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
+
+                 Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
+
                  int *playfield // Array mit den liegenden Blöcken
 );
 
@@ -40,5 +47,8 @@ int clear_line(Vector2 *current_Tetromino, //Vector Array mit den 4 Blöcken des
 //Autor: Florian Bruchhage
 void draw_completed_lines();
 
+void rotation(Vector2 *tetromino,
+              Vector2 *Rotation_Point //Rotationspunkt des Tetrominos
+                );
 
 #endif //TETRIS_GAMEPLAY_H

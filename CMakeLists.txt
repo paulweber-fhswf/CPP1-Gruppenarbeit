@@ -6,7 +6,7 @@ find_package(raylib 3.0 REQUIRED) # Requires at least version 3.0
 set(CMAKE_C_STANDARD 11) # Requires C11 standard
 
 
-add_executable(${PROJECT_NAME} main.c output.c output.h input.c input.h gameplay.c gameplay.h)
+add_executable(${PROJECT_NAME} main.c output.c output.h input.c input.h gameplay.c gameplay.h structure.h)
 
 
 target_link_libraries(${PROJECT_NAME} raylib)
