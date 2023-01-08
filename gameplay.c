@@ -90,7 +90,7 @@ void generate_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken de
             (Tetromino+3)->x = 6;
             (Tetromino+3)->y = -1;
 
-            Rotation_Point->x = (float)5.0;
+            Rotation_Point->x = (float)4.5;
             Rotation_Point->y = (float)-0.5;
 
             break;
@@ -122,8 +122,8 @@ void generate_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken de
             (Tetromino+3)->x = 5;
             (Tetromino+3)->y = -1;
 
-            Rotation_Point->x = (float)4.5;
-            Rotation_Point->y = (float)-0.5;
+            Rotation_Point->x = (float)4;
+            Rotation_Point->y = (float)-1;
 
             break;
 
@@ -153,8 +153,8 @@ void generate_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken de
             (Tetromino+3)->x = 5;
             (Tetromino+3)->y = -2;
 
-            Rotation_Point->x = (float)4.5;
-            Rotation_Point->y = (float)-0.5;
+            Rotation_Point->x = (float)4;
+            Rotation_Point->y = (float)-1;
 
             break;
 
@@ -184,8 +184,8 @@ void generate_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken de
             (Tetromino+3)->x = 5;
             (Tetromino+3)->y = -1;
 
-            Rotation_Point->x = (float)5.0;
-            Rotation_Point->y = (float)-1.0;
+            Rotation_Point->x = (float)4.5;
+            Rotation_Point->y = (float)-1.5;
 
             break;
 
@@ -215,8 +215,8 @@ void generate_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken de
             (Tetromino+3)->x = 5;
             (Tetromino+3)->y = -2;
 
-            Rotation_Point->x = (float)4.5;
-            Rotation_Point->y = (float)-0.5;
+            Rotation_Point->x = (float)4;
+            Rotation_Point->y = (float)-1;
 
             break;
 
@@ -246,8 +246,8 @@ void generate_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken de
             (Tetromino+3)->x = 5;
             (Tetromino+3)->y = -1;
 
-            Rotation_Point->x = (float)4.5;
-            Rotation_Point->y = (float)-0.5;
+            Rotation_Point->x = (float)4;
+            Rotation_Point->y = (float)-1;
 
             break;
 
@@ -394,7 +394,7 @@ void draw_completed_lines(){
 //Autor: Florian Bruchhage
 void rotation(Vector2 *Tetromino,
               Vector2 *Rotation_Point //Rotationspunkt des Tetrominos
-                )
+              )
 {
     //1. Ein temporäres Array im HEAP für den gedrehten Tetromino anlegen:
     Vector2 *temp = (Vector2 *)malloc(4 * sizeof(Vector2));
@@ -405,15 +405,23 @@ void rotation(Vector2 *Tetromino,
         temp[i].x = -Tetromino[i].y;
         temp[i].y = Tetromino[i].x;
     }
-        Rotation_Point->x = -temp_rp.y;
-        Rotation_Point->y = temp_rp.x;
+
+    Rotation_Point->x = -temp_rp.y;
+    Rotation_Point->y = temp_rp.x;
+
 
     //Den Inhalt des gedrehten, temporären Tetromino in den aktuellen Tetromino kopieren:
     for (int i = 0; i < 4; i++){
-
        (Tetromino+i)->x = (temp+i)->x + (temp_rp.x - Rotation_Point->x);
        (Tetromino+i)->y = (temp+i)->y + (temp_rp.y - Rotation_Point->y);
     }
+
+    Rotation_Point->x = temp_rp.x ;
+    Rotation_Point->y = temp_rp.y;
+
+
+
+
 
     //Das temporäre Array wieder freigeben.
     free(temp);
