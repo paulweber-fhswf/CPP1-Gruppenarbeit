@@ -8,6 +8,7 @@
 //Funktion um die Eingaben des ersten Spielers einzulesen
 //Autor: Paul Weber
 void player_1(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
+              Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
               int *playfield // Array mit den liegenden Blöcken
               ){
 
@@ -32,8 +33,8 @@ void player_1(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetromin
     }
 
     if (IsKeyDown(KEY_X)){
-        rotation(Tetromino);
+        rotation(Tetromino, Rotation_Point);
     }
 
-    move_tetromino(Tetromino, x_dif, y_dif, playfield); //Die X bzw. Y Differenz an die bewegen Funktion geben
+    move_tetromino(Tetromino, Rotation_Point, x_dif, y_dif, playfield); //Die X bzw. Y Differenz an die bewegen Funktion geben
 }

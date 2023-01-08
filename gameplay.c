@@ -13,6 +13,7 @@ int completed_lines = 0;
 //Funktion um den Tetromino in die x bzw y Richtung zu verschieben
 //Autor: Paul Weber
 void move_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
+                    Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
                     double x_dif, // X Verschiebung
                     double y_dif, // Y Verschiebung
                     int *playfield // Array mit den liegenden Blöcken
@@ -38,31 +39,35 @@ void move_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Te
         }
     }
 
-    //Falls alle Checks okay sind, werden die Koordinaten angpasst
+    //Falls alle Checks okay sind, werden die Koordinaten angepasst
     if(check == 0){
         for (int i = 0; i < 4; ++i) {
             (Tetromino+i)->x = (Tetromino+i)->x + x_dif;
             (Tetromino+i)->y = (Tetromino+i)->y + y_dif;
         }
+
+        Rotation_Point->x = Rotation_Point->x + x_dif;
+        Rotation_Point->y = Rotation_Point->y + y_dif;
     }
 
     // Gibt an, wie schnell der Tetromino fällt (mögliche Erweiterung: Schwierigkeitsgrad)
-    WaitTime(0.2);
+    WaitTime(0.1);
 }
 
 
 //Funktion um einen Zufälligen Tetronimino an der richtigen Stelle zu platzieren
 //Autor: Steffanie Wille, Paul Weber
-void generate_tetromino(Vector2* Tetromino //Vector Array mit den 4 Blöcken des Tetrominos
+void generate_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
+                        Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
+                        int *type //Typ des Tetrominos
 ){
     //Es wird zufällig eine Zahl (0-6) generiert, diese ist der Typ, dann werden einfach für den Typen die entsprechenden Koordinaten
     //in das Array geschrieben
 
-    int Type;
 
-    Type = GetRandomValue(0,6);
+    *type = 0; //GetRandomValue(0,6);
 
-    switch (Type) {
+    switch (*type) {
         case 0:
             /*          Type I
              *
@@ -84,6 +89,10 @@ void generate_tetromino(Vector2* Tetromino //Vector Array mit den 4 Blöcken des
 
             (Tetromino+3)->x = 6;
             (Tetromino+3)->y = -1;
+
+            Rotation_Point->x = 4.5;
+            Rotation_Point->y = -0.5;
+
             break;
 
 
@@ -257,6 +266,7 @@ void generate_tetromino(Vector2* Tetromino //Vector Array mit den 4 Blöcken des
 //Rückgabe: true bei Kollision, false bei nicht Kollision
 //Autor: Paul Weber
 bool drop_pice_1(Vector2 *current_Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
+                 Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
                  int *playfield // Array mit den liegenden Blöcken
                  ){
 
@@ -288,8 +298,9 @@ bool drop_pice_1(Vector2 *current_Tetromino, //Vector Array mit den 4 Blöcken d
     if(check == 0){
         for (int i = 0; i < 4; ++i) {
             (current_Tetromino+i)->y = (check_Tetromino+i)->y;
-            (current_Tetromino+i)->x = (check_Tetromino+i)->x;
         }
+
+        Rotation_Point->y = Rotation_Point->y+1;
     }
 
     free(check_Tetromino); //Speicherbereich des temporären Arrays wieder freigeben
@@ -357,20 +368,28 @@ void draw_completed_lines(){
 
 //Funktion zum Rotieren des aktuellen Tetrominos
 //Autor: Florian Bruchhage
-void rotation(Vector2 *Tetromino)
+void rotation(Vector2 *Tetromino,
+              Vector2 *Rotation_Point //Rotationspunkt des Tetrominos
+                )
 {
     //1. Ein temporäres Array im HEAP für den gedrehten Tetromino anlegen:
     Vector2 *temp = (Vector2 *)malloc(4 * sizeof(Vector2));
+    Vector2 temp_rp = *Rotation_Point;
 
     //Den temporären Tetromino um 90° drehen:
     for (int i = 0; i < 4; i++){
         temp[i].x = -Tetromino[i].y;
         temp[i].y = Tetromino[i].x;
     }
+        Rotation_Point->x = -temp_rp.y;
+        Rotation_Point->y = temp_rp.x;
+
 
     //Den Inhalt des gedrehten, temporären Tetromino in den aktuellen Tetromino kopieren:
     for (int i = 0; i < 4; i++){
-        Tetromino[i] = temp[i];
+
+       (Tetromino+i)->x = (temp+i)->x + (temp_rp.x - Rotation_Point->x);
+       (Tetromino+i)->y = (temp+i)->y + (temp_rp.y - Rotation_Point->y);
     }
 
     //Das temporäre Array wieder freigeben.

@@ -11,12 +11,17 @@
 
 //Funktion um den aktuellen Tetromino auszugeben
 //Autor: Paul Weber
-void draw_output(Vector2* Tetromino //Vector Array mit den 4 Blöcken des Tetrominos
+void draw_output(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
+                 Vector2 *Rotation_Point //Rotationspunkt des Tetrominos
 ){
     //Aktuelen Teromino ausgeben
     for (int i = 0; i < 4; ++i) {
         DrawRectangle( (Tetromino+i)->x * scale  + x_offset  , (Tetromino+i)->y * scale + y_offset, scale, scale,  RED);
     }
+
+    DrawText(TextFormat("x: %f, y: %f", Rotation_Point->x, Rotation_Point->y), 340, 10, 20, WHITE);
+
+    DrawCircle(Rotation_Point->x * scale  + x_offset  , Rotation_Point->y * scale + y_offset, 5,  WHITE);
 }
 
 //Funktion um den nächsten Tetromino anzuzeigen

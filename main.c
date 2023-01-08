@@ -37,8 +37,8 @@ int main()
     }
 
     //Zwei Tetromino für den aktuellen und nächsten generieren
-    generate_tetromino(current_Tetromino.Tetromino);
-    generate_tetromino(next_Tetromino.Tetromino);
+    generate_tetromino(current_Tetromino.Tetromino, &current_Tetromino.Rotation_Point, &current_Tetromino.type);
+    generate_tetromino(next_Tetromino.Tetromino, &next_Tetromino.Rotation_Point, &next_Tetromino.type);
 
     int end = 0; //Variable für das beenden mit 0 initalisieren
     bool check = false;
@@ -52,8 +52,8 @@ int main()
             break;
         }
 
-        player_1(current_Tetromino.Tetromino, playfield); //Eingabe Spieler 1 lesen
-        check = drop_pice_1(current_Tetromino.Tetromino, playfield); //Tetromino 1 Block fallen lassen
+        player_1(current_Tetromino.Tetromino, &current_Tetromino.Rotation_Point, playfield); //Eingabe Spieler 1 lesen
+        check = drop_pice_1(current_Tetromino.Tetromino, &current_Tetromino.Rotation_Point, playfield); //Tetromino 1 Block fallen lassen
 
         //Ausgabe beginnen---------------
         BeginDrawing();
@@ -62,7 +62,7 @@ int main()
         ClearBackground(DARKGRAY);
 
         //Spielfeld, den aktuellen Tetomino und weitere Spielfeldparameter ausgeben
-        draw_output(current_Tetromino.Tetromino);
+        draw_output(current_Tetromino.Tetromino, &current_Tetromino.Rotation_Point);
         show_next_tetromino(next_Tetromino.Tetromino);
         draw_completed_lines();
 
@@ -79,8 +79,10 @@ int main()
                 //Den nächsten Tetromino in den aktuellen kopieren
                 (current_Tetromino.Tetromino+i)->y = (next_Tetromino.Tetromino+i)->y;
                 (current_Tetromino.Tetromino+i)->x = (next_Tetromino.Tetromino+i)->x;
+
+                current_Tetromino.Rotation_Point = next_Tetromino.Rotation_Point;
             }
-            generate_tetromino(next_Tetromino.Tetromino); //Den nächsten Tetromino generieren
+            generate_tetromino(next_Tetromino.Tetromino, &next_Tetromino.Rotation_Point, &next_Tetromino.type);
 
             //Wenn ein Teromino über 20 Zeilen geht, wird das Spiel beendet
             for (int x = 0; x < 10; ++x) {
