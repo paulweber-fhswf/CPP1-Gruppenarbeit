@@ -30,9 +30,7 @@ void generate_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken de
 //Rückgabe: true bei Kollision, false bei nicht Kollision
 //Autor: Paul Weber
 bool drop_pice_1(Vector2 *current_Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
-
                  Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
-
                  int *playfield // Array mit den liegenden Blöcken
 );
 
