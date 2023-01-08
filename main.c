@@ -7,6 +7,7 @@
 #include "output.h"
 #include "input.h"
 #include "gameplay.h"
+#include "structure.h"
 
 //Aufrufen der Spiellogiken
 //Autor: Paul Weber
@@ -19,8 +20,13 @@ int main()
     SetTargetFPS(60);
 
     //Array für aktuellen und nächsten Teromino erstellen und Array für die liegenden Blöcke erstellen
-    Vector2 *current_Tetromino = (Vector2*) malloc (4* sizeof(Vector2));
-    Vector2 *next_Tetromino = (Vector2*) malloc (4* sizeof(Vector2));
+
+    tetromino current_Tetromino;
+    tetromino next_Tetromino;
+
+    current_Tetromino.Tetromino = (Vector2*) malloc (4* sizeof(Vector2));
+    next_Tetromino.Tetromino = (Vector2*) malloc (4* sizeof(Vector2));
+
     int *playfield = (int*) malloc (10 * 40 * sizeof(int)); // *(playfield + x + y * 10)
 
     //Spielfeld "leeren"
@@ -31,8 +37,8 @@ int main()
     }
 
     //Zwei Tetromino für den aktuellen und nächsten generieren
-    generate_tetromino(current_Tetromino);
-    generate_tetromino(next_Tetromino);
+    generate_tetromino(current_Tetromino.Tetromino);
+    generate_tetromino(next_Tetromino.Tetromino);
 
     int end = 0; //Variable für das beenden mit 0 initalisieren
     bool check = false;
@@ -46,8 +52,8 @@ int main()
             break;
         }
 
-        player_1(current_Tetromino, playfield); //Eingabe Spieler 1 lesen
-        check = drop_pice_1(current_Tetromino, playfield); //Tetromino 1 Block fallen lassen
+        player_1(current_Tetromino.Tetromino, playfield); //Eingabe Spieler 1 lesen
+        check = drop_pice_1(current_Tetromino.Tetromino, playfield); //Tetromino 1 Block fallen lassen
 
         //Ausgabe beginnen---------------
         BeginDrawing();
@@ -56,8 +62,8 @@ int main()
         ClearBackground(DARKGRAY);
 
         //Spielfeld, den aktuellen Tetomino und weitere Spielfeldparameter ausgeben
-        draw_output(current_Tetromino);
-        show_next_tetromino(next_Tetromino);
+        draw_output(current_Tetromino.Tetromino);
+        show_next_tetromino(next_Tetromino.Tetromino);
         draw_completed_lines();
 
         //Wenn der Tetromino mit einem Block oder den Boden kollidiert
@@ -65,16 +71,16 @@ int main()
             for (int i = 0; i < 4; ++i) {
 
                 //Den aktuell fallenden Tetromino in das Array der liegenden Blöcke kopieren
-                *(playfield + (int)(current_Tetromino+i)->x + (int)((current_Tetromino+i)->y+20) * 10) = 1;
+                *(playfield + (int)(current_Tetromino.Tetromino+i)->x + (int)((current_Tetromino.Tetromino+i)->y+20) * 10) = 1;
 
                 //Funktion zum Reihe leeren, bzw. die Überprüfung dafür starten
-                clear_line(current_Tetromino, playfield);
+                clear_line(current_Tetromino.Tetromino, playfield);
 
-                //Den nächsten Tetromino in den aktuellen Kopieren
-                (current_Tetromino+i)->y = (next_Tetromino+i)->y;
-                (current_Tetromino+i)->x = (next_Tetromino+i)->x;
+                //Den nächsten Tetromino in den aktuellen kopieren
+                (current_Tetromino.Tetromino+i)->y = (next_Tetromino.Tetromino+i)->y;
+                (current_Tetromino.Tetromino+i)->x = (next_Tetromino.Tetromino+i)->x;
             }
-            generate_tetromino(next_Tetromino); //Den nächsten Tetromino generieren
+            generate_tetromino(next_Tetromino.Tetromino); //Den nächsten Tetromino generieren
 
             //Wenn ein Teromino über 20 Zeilen geht, wird das Spiel beendet
             for (int x = 0; x < 10; ++x) {
@@ -91,8 +97,8 @@ int main()
     }
 
     //Variablen freigeben
-    free(current_Tetromino);
-    free(next_Tetromino);
+    free(current_Tetromino.Tetromino);
+    free(next_Tetromino.Tetromino);
     free(playfield);
 
     CloseWindow(); //Fenster schließen
