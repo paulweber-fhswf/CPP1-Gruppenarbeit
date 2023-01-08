@@ -62,8 +62,8 @@ int main()
         ClearBackground(DARKGRAY);
 
         //Spielfeld, den aktuellen Tetomino und weitere Spielfeldparameter ausgeben
-        draw_output(current_Tetromino.Tetromino, &current_Tetromino.Rotation_Point);
-        show_next_tetromino(next_Tetromino.Tetromino);
+        draw_output(current_Tetromino.Tetromino, &current_Tetromino.Rotation_Point, &current_Tetromino.type);
+        show_next_tetromino(next_Tetromino.Tetromino, &next_Tetromino.type);
         draw_completed_lines();
 
         //Wenn der Tetromino mit einem Block oder den Boden kollidiert
@@ -71,7 +71,7 @@ int main()
             for (int i = 0; i < 4; ++i) {
 
                 //Den aktuell fallenden Tetromino in das Array der liegenden Blöcke kopieren
-                *(playfield + (int)(current_Tetromino.Tetromino+i)->x + (int)((current_Tetromino.Tetromino+i)->y+20) * 10) = 1;
+                *(playfield + (int)(current_Tetromino.Tetromino+i)->x + (int)((current_Tetromino.Tetromino+i)->y+20) * 10) = current_Tetromino.type +1;
 
                 //Funktion zum Reihe leeren, bzw. die Überprüfung dafür starten
                 clear_line(current_Tetromino.Tetromino, playfield);
@@ -80,13 +80,17 @@ int main()
                 (current_Tetromino.Tetromino+i)->y = (next_Tetromino.Tetromino+i)->y;
                 (current_Tetromino.Tetromino+i)->x = (next_Tetromino.Tetromino+i)->x;
 
-                current_Tetromino.Rotation_Point = next_Tetromino.Rotation_Point;
+
             }
+
+            current_Tetromino.Rotation_Point = next_Tetromino.Rotation_Point;
+            current_Tetromino.type = next_Tetromino.type;
+
             generate_tetromino(next_Tetromino.Tetromino, &next_Tetromino.Rotation_Point, &next_Tetromino.type);
 
             //Wenn ein Teromino über 20 Zeilen geht, wird das Spiel beendet
             for (int x = 0; x < 10; ++x) {
-                if(*(playfield+x+19*10)  == 1){
+                if(*(playfield+x+19*10) > 0){
                     end = 1;
                 }
             }

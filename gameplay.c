@@ -65,7 +65,7 @@ void generate_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken de
     //in das Array geschrieben
 
 
-    *type = 0; //GetRandomValue(0,6);
+    *type = GetRandomValue(0,6);
 
     switch (*type) {
         case 0:
@@ -289,7 +289,7 @@ bool drop_pice_1(Vector2 *current_Tetromino, //Vector Array mit den 4 Blöcken d
         }
 
         //Überprüfen, ob der Block einen liegenden Block berührt
-        if(*(playfield + (int)(check_Tetromino+i)->x + (int)((check_Tetromino+i)->y+20) * 10) == 1){
+        if(*(playfield + (int)(check_Tetromino+i)->x + (int)((check_Tetromino+i)->y+20) * 10) > 0){
             check = 1;
         }
     }

@@ -10,12 +10,14 @@
 //Funktion um den aktuellen Tetromino auszugeben
 //Autor: Paul Weber
 void draw_output(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
-                 Vector2 *Rotation_Point //Rotationspunkt des Tetrominos
+                 Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
+                 int *type //Typ des Tetrominos
 );
 
 //Funktion um den nächsten Tetromino anzuzeigen
 //Autor: Paul Weber
-void show_next_tetromino(Vector2* Tetromino //Vector Array mit den 4 Blöcken des Tetrominos
+void show_next_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
+                         int *type //Typ des Tetrominos
 );
 
 //Funktion um alle liegenden Blöcke auszugeben
