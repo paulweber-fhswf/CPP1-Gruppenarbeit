@@ -11,6 +11,7 @@
 //Funktion um den Tetromino in die x bzw y Richtung zu verschieben
 //Autor: Paul Weber
 void move_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
+
                     Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
                     double x_dif, // X Verschiebung
                     double y_dif, // Y Verschiebung
@@ -19,6 +20,7 @@ void move_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Te
 
 //Funktion um einen Zufälligen Tetronimino an der richtigen Stelle zu platzieren
 //Autor: Steffanie Wille, Paul Weber
+
 void generate_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
                         Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
                         int *type //Typ des Tetrominos
@@ -28,7 +30,9 @@ void generate_tetromino(Vector2* Tetromino, //Vector Array mit den 4 Blöcken de
 //Rückgabe: true bei Kollision, false bei nicht Kollision
 //Autor: Paul Weber
 bool drop_pice_1(Vector2 *current_Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
+
                  Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
+
                  int *playfield // Array mit den liegenden Blöcken
 );
 

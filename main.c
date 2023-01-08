@@ -9,6 +9,7 @@
 #include "gameplay.h"
 #include "structure.h"
 
+
 //Aufrufen der Spiellogiken
 //Autor: Paul Weber
 int main()
@@ -55,6 +56,7 @@ int main()
         player_1(current_Tetromino.Tetromino, &current_Tetromino.Rotation_Point, playfield); //Eingabe Spieler 1 lesen
         check = drop_pice_1(current_Tetromino.Tetromino, &current_Tetromino.Rotation_Point, playfield); //Tetromino 1 Block fallen lassen
 
+
         //Ausgabe beginnen---------------
         BeginDrawing();
 
@@ -64,6 +66,7 @@ int main()
         //Spielfeld, den aktuellen Tetomino und weitere Spielfeldparameter ausgeben
         draw_output(current_Tetromino.Tetromino, &current_Tetromino.Rotation_Point, &current_Tetromino.type);
         show_next_tetromino(next_Tetromino.Tetromino, &next_Tetromino.type);
+
         draw_completed_lines();
 
         //Wenn der Tetromino mit einem Block oder den Boden kollidiert
@@ -91,6 +94,7 @@ int main()
             //Wenn ein Teromino über 20 Zeilen geht, wird das Spiel beendet
             for (int x = 0; x < 10; ++x) {
                 if(*(playfield+x+19*10) > 0){
+
                     end = 1;
                 }
             }
@@ -105,6 +109,7 @@ int main()
     //Variablen freigeben
     free(current_Tetromino.Tetromino);
     free(next_Tetromino.Tetromino);
+
     free(playfield);
 
     CloseWindow(); //Fenster schließen
