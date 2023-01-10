@@ -25,10 +25,6 @@ int main()
     tetromino current_Tetromino;
     tetromino next_Tetromino;
 
-    current_Tetromino.Tetromino = (Vector2*) malloc (4* sizeof(Vector2));
-    next_Tetromino.Tetromino = (Vector2*) malloc (4* sizeof(Vector2));
-    Vector2 *temp_switch;
-
     int *playfield = (int*) malloc (10 * 40 * sizeof(int)); // *(playfield + x + y * 10)
 
     //Spielfeld "leeren"
@@ -81,9 +77,7 @@ int main()
                 clear_line(&current_Tetromino, playfield);
             }
 
-            temp_switch = current_Tetromino.Tetromino;
             current_Tetromino = next_Tetromino;
-            next_Tetromino.Tetromino = temp_switch;
 
             generate_tetromino(&next_Tetromino);
 
@@ -102,8 +96,6 @@ int main()
     }
 
     //Variablen freigeben
-    free(current_Tetromino.Tetromino);
-    free(next_Tetromino.Tetromino);
     free(playfield);
 
     CloseWindow(); //Fenster schließen

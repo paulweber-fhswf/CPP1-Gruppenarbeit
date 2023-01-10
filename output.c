@@ -28,7 +28,7 @@ void show_next_tetromino(tetromino *current_Tetromino
     DrawText("Next Piece:", 10, 10, 20, BLUE);
 
     for (int i = 0; i < 4; ++i) {
-        DrawRectangle((current_Tetromino->Tetromino+i)->x * scale , (current_Tetromino->Tetromino+i)->y * scale + 100, scale, scale, get_color(current_Tetromino->type));
+        DrawRectangle((current_Tetromino->Tetromino+i)->x * scale, (current_Tetromino->Tetromino+i)->y * scale + 100, scale, scale, get_color(current_Tetromino->type));
     }
 }
 
@@ -59,7 +59,11 @@ void draw_game_over(){
     WaitTime(3.0);
 }
 
-Color get_color (int type){
+//Bestimmen der Farbe
+//Rückgabe: Farbe es types Color
+//Autor: Paul Weber
+Color get_color (int type //Typennummer des Blockes
+){
 
     Color return_color;
 

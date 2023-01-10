@@ -28,6 +28,10 @@ void draw_playfield(int *playfield // Array mit den liegenden Blöcken
 //Autor: Florian Bruchhage
 void draw_game_over();
 
-Color get_color (int type);
+//Bestimmen der Farbe
+//Rückgabe: Farbe es types Color
+//Autor: Paul Weber
+Color get_color (int type //Typennummer des Blockes
+);
 
 #endif //TETRIS_OUTPUT_H

@@ -383,7 +383,7 @@ int clear_line(tetromino *current_Tetromino,
 }
 
 //Funktion zum Darstellen des Zählers für vollständige Linen
-//Autor: Florian Bruchhage
+//Autor: Florian Bruchhage, Paul Weber
 void draw_completed_lines(){
     DrawText(TextFormat("FERTIGE LINIEN:\n       %4i", completed_lines), 580, 10, 20, GREEN);
 }
@@ -398,7 +398,7 @@ void rotation(tetromino *current_Tetromino,
     int check = 0;
 
     //1. Ein temporäres Array im HEAP für den gedrehten Tetromino anlegen:
-    Vector2 *temp = (Vector2 *)malloc(4 * sizeof(Vector2));
+    Vector2 temp[4];
     Vector2 temp_rp = current_Tetromino->Rotation_Point;
 
     temp_rp.x = -current_Tetromino->Rotation_Point.y;
@@ -435,9 +435,6 @@ void rotation(tetromino *current_Tetromino,
             (current_Tetromino->Tetromino+i)->y = (temp+i)->y;
         }
     }
-
-    //Das temporäre Array wieder freigeben.
-    free(temp);
 }
 
 

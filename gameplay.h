@@ -38,7 +38,7 @@ int clear_line(tetromino *current_Tetromino,
 );
 
 //Funktion zum Darstellen des Zählers für vollständige Linen
-//Autor: Florian Bruchhage
+//Autor: Florian Bruchhage, Paul Weber
 void draw_completed_lines();
 
 void rotation(tetromino *current_Tetromino,
