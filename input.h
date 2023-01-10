@@ -4,12 +4,13 @@
 
 #ifndef TETRIS_INPUT_H
 #define TETRIS_INPUT_H
+
 #include <raylib.h>
+#include "structure.h"
 
 //Funktion um die Eingaben des ersten Spielers einzulesen
 //Autor: Paul Weber
-void player_1(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
-              Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
+void player_1(tetromino *current_Tetromino,
               int *playfield // Array mit den liegenden Blöcken
 );
 
