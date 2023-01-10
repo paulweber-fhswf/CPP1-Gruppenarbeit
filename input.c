@@ -7,13 +7,11 @@
 
 //Funktion um die Eingaben des ersten Spielers einzulesen
 //Autor: Paul Weber
-void player_1(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetrominos
-
-              Vector2 *Rotation_Point, //Rotationspunkt des Tetrominos
+void player_1(tetromino *current_Tetromino,
               int *playfield // Array mit den liegenden Blöcken
               ){
 
-    int x_dif = 0, y_dif = 0; // Variablen für die X und Y unterschiede
+    float x_dif = 0, y_dif = 0; // Variablen für die X und Y unterschiede
 
     //Einlesen der Tastatur: abhängig von der gedrückten Taste, wird der Tetromino um 1 verschoben
 
@@ -33,9 +31,9 @@ void player_1(Vector2* Tetromino, //Vector Array mit den 4 Blöcken des Tetromin
         y_dif = 1;
     }
 
-    if (IsKeyDown(KEY_X)){
-        rotation(Tetromino, Rotation_Point);
+    if (IsKeyPressed(KEY_X)){
+        rotation(current_Tetromino, playfield);
     }
 
-    move_tetromino(Tetromino, Rotation_Point, x_dif, y_dif, playfield); //Die X bzw. Y Differenz an die bewegen Funktion geben
+    move_tetromino(current_Tetromino, x_dif, y_dif, playfield); //Die X bzw. Y Differenz an die bewegen Funktion geben
 }

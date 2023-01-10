@@ -6,7 +6,7 @@
 #define TETRIS_STRUCTURE_H
 
 typedef struct{
-    Vector2 *Tetromino;
+    Vector2 Tetromino[4];
     Vector2 Rotation_Point;
     int type;
 }tetromino;
