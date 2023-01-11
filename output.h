@@ -34,4 +34,8 @@ void draw_game_over();
 Color get_color (int type //Typennummer des Blockes
 );
 
+//Funktion zum Darstellen des Zählers für vollständige Linen
+//Autor: Florian Bruchhage, Paul Weber
+void draw_completed_lines(int completed_lines);
+
 #endif //TETRIS_OUTPUT_H

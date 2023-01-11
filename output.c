@@ -99,3 +99,9 @@ Color get_color (int type //Typennummer des Blockes
 
     return return_color;
 }
+
+//Funktion zum Darstellen des Zählers für vollständige Linen
+//Autor: Florian Bruchhage, Paul Weber
+void draw_completed_lines(int completed_lines){
+    DrawText(TextFormat("Completed Lines:\n       %4i", completed_lines), 580, 10, 20, GREEN);
+}

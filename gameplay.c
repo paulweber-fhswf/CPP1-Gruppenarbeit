@@ -379,14 +379,9 @@ int clear_line(tetromino *current_Tetromino,
 
     }
 
-    return 0;
+    return completed_lines;
 }
 
-//Funktion zum Darstellen des Zählers für vollständige Linen
-//Autor: Florian Bruchhage, Paul Weber
-void draw_completed_lines(){
-    DrawText(TextFormat("FERTIGE LINIEN:\n       %4i", completed_lines), 580, 10, 20, GREEN);
-}
 
 
 //Funktion zum Rotieren des aktuellen Tetrominos

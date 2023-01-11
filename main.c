@@ -26,6 +26,7 @@ int main()
     tetromino next_Tetromino;
 
     int *playfield = (int*) malloc (10 * 40 * sizeof(int)); // *(playfield + x + y * 10)
+    int completed_lines = 0;
 
     //Spielfeld "leeren"
     for (int x = 0; x < 10; ++x) {
@@ -64,7 +65,7 @@ int main()
         draw_output(&current_Tetromino);
         show_next_tetromino(&next_Tetromino);
 
-        draw_completed_lines();
+        draw_completed_lines(completed_lines);
 
         //Wenn der Tetromino mit einem Block oder den Boden kollidiert
         if(check == true){
@@ -74,7 +75,7 @@ int main()
                 *(playfield + (int)(current_Tetromino.Tetromino+i)->x + (int)((current_Tetromino.Tetromino+i)->y+20) * 10) = current_Tetromino.type;
 
                 //Funktion zum Reihe leeren, bzw. die Überprüfung dafür starten
-                clear_line(&current_Tetromino, playfield);
+                completed_lines = clear_line(&current_Tetromino, playfield);
             }
 
             current_Tetromino = next_Tetromino;
