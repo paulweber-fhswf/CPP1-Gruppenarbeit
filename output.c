@@ -50,6 +50,14 @@ void draw_playfield(int *playfield // Array mit den liegenden Blöcken
     }
 }
 
+void draw_init(){
+    //Konfiguration für das Spielfenster
+    const int screenWidth = 800;
+    const int screenHeight = 450;
+    InitWindow(screenWidth, screenHeight, "Tetris");
+    SetTargetFPS(60);
+}
+
 //Funktion zum Darstellen eines GameOver Screens
 //Autor: Florian Bruchhage
 void draw_game_over(){
@@ -104,4 +112,8 @@ Color get_color (int type //Typennummer des Blockes
 //Autor: Florian Bruchhage, Paul Weber
 void draw_completed_lines(int completed_lines){
     DrawText(TextFormat("Completed Lines:\n       %4i", completed_lines), 580, 10, 20, GREEN);
+}
+
+void game_over(int completed_lines){
+    DrawText(TextFormat("Game Over Completed Lines:\n       %4i", completed_lines), 580, 100, 20, GREEN);
 }

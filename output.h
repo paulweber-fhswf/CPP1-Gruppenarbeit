@@ -38,4 +38,8 @@ Color get_color (int type //Typennummer des Blockes
 //Autor: Florian Bruchhage, Paul Weber
 void draw_completed_lines(int completed_lines);
 
+void game_over(int completed_lines);
+
+void draw_init();
+
 #endif //TETRIS_OUTPUT_H
