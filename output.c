@@ -58,14 +58,6 @@ void draw_init(){
     SetTargetFPS(60);
 }
 
-//Funktion zum Darstellen eines GameOver Screens
-//Autor: Florian Bruchhage
-void draw_game_over(){
-    BeginDrawing();
-    DrawText("GAME OVER", 340, 10, 20, WHITE);
-    EndDrawing();
-    WaitTime(3.0);
-}
 
 //Bestimmen der Farbe
 //Rückgabe: Farbe es types Color
@@ -114,6 +106,12 @@ void draw_completed_lines(int completed_lines){
     DrawText(TextFormat("Completed Lines:\n       %4i", completed_lines), 580, 10, 20, GREEN);
 }
 
+//Funktion zum Darstellen des Zählers für vollständige Linen
+//Autor: Florian Bruchhage, Paul Weber
 void game_over(int completed_lines){
-    DrawText(TextFormat("Game Over Completed Lines:\n       %4i", completed_lines), 580, 100, 20, GREEN);
+    ClearBackground(DARKGRAY);
+    DrawText("Game Over", 270, 150, 50, RED);
+
+
+    DrawText(TextFormat("Completed Lines: %4i", completed_lines), 290, 225, 20, RED);
 }

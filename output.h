@@ -24,9 +24,6 @@ void show_next_tetromino(tetromino *current_Tetromino
 void draw_playfield(int *playfield // Array mit den liegenden Blöcken
 );
 
-//Funktion zum Darstellen eines GameOver Screens
-//Autor: Florian Bruchhage
-void draw_game_over();
 
 //Bestimmen der Farbe
 //Rückgabe: Farbe es types Color
@@ -38,6 +35,8 @@ Color get_color (int type //Typennummer des Blockes
 //Autor: Florian Bruchhage, Paul Weber
 void draw_completed_lines(int completed_lines);
 
+//Funktion zum Darstellen eines GameOver Screens
+//Autor: Florian Bruchhage, Paul Weber
 void game_over(int completed_lines);
 
 void draw_init();

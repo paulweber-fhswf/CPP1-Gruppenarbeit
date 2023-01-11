@@ -50,8 +50,6 @@ void move_tetromino(tetromino *current_Tetromino,
         current_Tetromino->Rotation_Point.y = current_Tetromino->Rotation_Point.y + y_dif;
     }
 
-    // Gibt an, wie schnell der Tetromino fällt (mögliche Erweiterung: Schwierigkeitsgrad)
-    WaitTime(0.1);
 }
 
 
@@ -376,7 +374,6 @@ int clear_line(tetromino *current_Tetromino,
             //Zähler für vollständige Linien inkrementieren
             completed_lines++;
         }
-
     }
 
     return completed_lines;
@@ -385,7 +382,7 @@ int clear_line(tetromino *current_Tetromino,
 
 
 //Funktion zum Rotieren des aktuellen Tetrominos
-//Autor: Florian Bruchhage
+//Autor: Florian Bruchhage, Paul Weber
 void rotation(tetromino *current_Tetromino,
               int *playfield // Array mit den liegenden Blöcken
 )

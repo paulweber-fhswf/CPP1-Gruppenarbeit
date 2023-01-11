@@ -12,7 +12,8 @@
 int main_game_loop(tetromino *current_Tetromino,
                    tetromino *next_Tetromino,
                    int *playfield, // Array mit den liegenden Blöcken
-                   int *completed_lines
+                   int *completed_lines,
+                   double *old_time
 );
 
 
@@ -27,6 +28,7 @@ int main()
     tetromino current_Tetromino;
     tetromino next_Tetromino;
 
+    double old_time = GetTime();
     int *playfield = (int*) malloc (10 * 40 * sizeof(int)); // *(playfield + x + y * 10)
     int completed_lines = 0;
     int end = 0;
@@ -43,31 +45,22 @@ int main()
     generate_tetromino(&current_Tetromino);
     generate_tetromino(&next_Tetromino);
 
-
-
     //Game loop solange laufen lassen, bis das Fenster geschlossen wird oder das Spiel zu Ende geht
     while (!WindowShouldClose() && end==0)
     {
         //Ausgabe beginnen---------------
         BeginDrawing();
 
-        end = main_game_loop(&current_Tetromino, &next_Tetromino, playfield, &completed_lines);
+        end = main_game_loop(&current_Tetromino, &next_Tetromino, playfield, &completed_lines, &old_time);
 
         EndDrawing(); // Zeichnen beenden
     }
 
     while(!WindowShouldClose()){
         BeginDrawing();
-        ClearBackground(DARKGRAY);
         game_over(completed_lines);
         EndDrawing();
     }
-
-
-
-
-
-
 
 
     //Variablen freigeben
@@ -82,33 +75,29 @@ int main()
 int main_game_loop(tetromino *current_Tetromino,
                    tetromino *next_Tetromino,
                    int *playfield, // Array mit den liegenden Blöcken
-                   int *completed_lines
+                   int *completed_lines,
+                   double *old_time
 ){
     int end = 0; //Variable für das beenden mit 0 initalisieren
     bool check = false;
 
 
-        player_1(current_Tetromino, playfield); //Eingabe Spieler 1 lesen
+    player_1(current_Tetromino, playfield); //Eingabe Spieler 1 lesen
+
+    if(GetTime() > *old_time+0.2){
         check = drop_pice_1(current_Tetromino, playfield); //Tetromino 1 Block fallen lassen
+        *old_time = GetTime();
+    }
 
-        //Hintergrund
-        ClearBackground(DARKGRAY);
 
-        //Spielfeld, den aktuellen Tetomino und weitere Spielfeldparameter ausgeben
-        draw_output(current_Tetromino);
-        show_next_tetromino(next_Tetromino);
+    //Wenn der Tetromino mit einem Block oder den Boden kollidiert
+    if(check == true) {
+        for (int i = 0; i < 4; ++i) {
 
-        draw_completed_lines(*completed_lines);
+            //Den aktuell fallenden Tetromino in das Array der liegenden Blöcke kopieren
+            *(playfield + (int) (current_Tetromino->Tetromino + i)->x + (int) ((current_Tetromino->Tetromino + i)->y + 20) * 10) = current_Tetromino->type;
 
-        //Wenn der Tetromino mit einem Block oder den Boden kollidiert
-        if(check == true) {
-            for (int i = 0; i < 4; ++i) {
-
-                //Den aktuell fallenden Tetromino in das Array der liegenden Blöcke kopieren
-                *(playfield + (int) (current_Tetromino->Tetromino + i)->x +
-                  (int) ((current_Tetromino->Tetromino + i)->y + 20) * 10) = current_Tetromino->type;
-
-                //Funktion zum Reihe leeren, bzw. die Überprüfung dafür starten
+            //Funktion zum Reihe leeren, bzw. die Überprüfung dafür starten
                 *completed_lines = clear_line(current_Tetromino, playfield);
             }
 
@@ -122,10 +111,17 @@ int main_game_loop(tetromino *current_Tetromino,
                     end = 1;
                 }
             }
-
-
         }
-        draw_playfield(playfield); //Spielfeld zeichnen
+
+
+    //Hintergrund
+    ClearBackground(DARKGRAY);
+
+    //Spielfeld, den aktuellen Tetomino und weitere Spielfeldparameter ausgeben
+    draw_output(current_Tetromino);
+    show_next_tetromino(next_Tetromino);
+    draw_completed_lines(*completed_lines);
+    draw_playfield(playfield); //Spielfeld zeichnen
 
 
     return end;

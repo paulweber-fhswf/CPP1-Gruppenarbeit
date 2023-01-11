@@ -23,10 +23,6 @@ void player_1(tetromino *current_Tetromino,
         x_dif = -1;
     }
 
-    if (IsKeyDown(KEY_UP)){
-        y_dif = -1;
-    }
-
     if (IsKeyDown(KEY_DOWN)){
         y_dif = 1;
     }
@@ -34,6 +30,8 @@ void player_1(tetromino *current_Tetromino,
     if (IsKeyPressed(KEY_X)){
         rotation(current_Tetromino, playfield);
     }
+
+    WaitTime(0.05);
 
     move_tetromino(current_Tetromino, x_dif, y_dif, playfield); //Die X bzw. Y Differenz an die bewegen Funktion geben
 }
