@@ -10,7 +10,7 @@
 
 //Funktion um die Eingaben des ersten Spielers einzulesen
 //Autor: Paul Weber
-void player_1(tetromino *current_Tetromino,
+void player_1(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos
               int *playfield // Array mit den liegenden Blöcken
 );
 
