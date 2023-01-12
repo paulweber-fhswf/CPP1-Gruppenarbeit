@@ -11,19 +11,18 @@
 //Funktion um den aktuellen Tetromino auszugeben
 //Autor: Paul Weber
 
-void draw_output(tetromino *current_Tetromino
+void draw_output(tetromino *current_Tetromino //Struktur des aktuellen Tetrominos
 );
 
 //Funktion um den nächsten Tetromino anzuzeigen
 //Autor: Paul Weber
-void show_next_tetromino(tetromino *current_Tetromino
+void show_next_tetromino(tetromino *current_Tetromino //Struktur des aktuellen Tetrominos
 );
 
 //Funktion um alle liegenden Blöcke auszugeben
 //Autor: Paul Weber
 void draw_playfield(int *playfield // Array mit den liegenden Blöcken
 );
-
 
 //Bestimmen der Farbe
 //Rückgabe: Farbe es types Color
@@ -39,6 +38,8 @@ void draw_completed_lines(int completed_lines);
 //Autor: Florian Bruchhage, Paul Weber
 void game_over(int completed_lines);
 
+//Funktion um das Fenster zu initialisieren
+//Autor: Paul Weber
 void draw_init();
 
 #endif //TETRIS_OUTPUT_H

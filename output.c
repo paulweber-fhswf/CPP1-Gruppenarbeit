@@ -11,19 +11,17 @@
 
 //Funktion um den aktuellen Tetromino auszugeben
 //Autor: Paul Weber
-
-void draw_output(tetromino *current_Tetromino
+void draw_output(tetromino *current_Tetromino //Struktur des aktuellen Tetrominos
 ){
     //Aktuelen Teromino ausgeben
     for (int i = 0; i < 4; ++i) {
-        DrawRectangle((current_Tetromino->Tetromino+i)->x * scale  + x_offset  ,(current_Tetromino->Tetromino+i)->y * scale + y_offset, scale, scale,
-                      get_color(current_Tetromino->type));
+        DrawRectangle((current_Tetromino->Tetromino+i)->x * scale  + x_offset, (current_Tetromino->Tetromino+i)->y * scale + y_offset, scale, scale, get_color(current_Tetromino->type));
     }
 }
 
 //Funktion um den nächsten Tetromino anzuzeigen
 //Autor: Paul Weber
-void show_next_tetromino(tetromino *current_Tetromino
+void show_next_tetromino(tetromino *current_Tetromino //Struktur des aktuellen Tetrominos
 ){
     DrawText("Next Piece:", 10, 10, 20, BLUE);
 
@@ -44,12 +42,17 @@ void draw_playfield(int *playfield // Array mit den liegenden Blöcken
     //Alle Koordinaten des Arrays durchgehen
     for (int x = 0; x < 10; ++x) {
         for (int y = 0; y < 40; ++y) {
-            if(*(playfield + x + y * 10) >= 0)
-            DrawRectangle(x * scale +x_offset , (y-20) * scale +y_offset , scale, scale, get_color(*(playfield + x + y * 10)));
+            //Überprüfen, ob an der Position ein Block liegt
+            if(*(playfield + x + y * 10) >= 0){
+                //Wenn ein Block vorhanden ist, diesen mit der entsprechenden Farbe Zeichnen
+                DrawRectangle(x * scale +x_offset , (y-20) * scale +y_offset , scale, scale, get_color(*(playfield + x + y * 10)));
+            }
         }
     }
 }
 
+//Funktion um das Fenster zu initialisieren
+//Autor: Paul Weber
 void draw_init(){
     //Konfiguration für das Spielfenster
     const int screenWidth = 800;
@@ -58,9 +61,8 @@ void draw_init(){
     SetTargetFPS(60);
 }
 
-
 //Bestimmen der Farbe
-//Rückgabe: Farbe es types Color
+//Rückgabe: Farbe des types Color
 //Autor: Paul Weber
 Color get_color (int type //Typennummer des Blockes
 ){
@@ -102,16 +104,16 @@ Color get_color (int type //Typennummer des Blockes
 
 //Funktion zum Darstellen des Zählers für vollständige Linen
 //Autor: Florian Bruchhage, Paul Weber
-void draw_completed_lines(int completed_lines){
+void draw_completed_lines(int completed_lines
+){
     DrawText(TextFormat("Completed Lines:\n       %4i", completed_lines), 580, 10, 20, GREEN);
 }
 
 //Funktion zum Darstellen des Zählers für vollständige Linen
 //Autor: Florian Bruchhage, Paul Weber
-void game_over(int completed_lines){
+void game_over(int completed_lines
+){
     ClearBackground(DARKGRAY);
     DrawText("Game Over", 270, 150, 50, RED);
-
-
     DrawText(TextFormat("Completed Lines: %4i", completed_lines), 290, 225, 20, RED);
 }
