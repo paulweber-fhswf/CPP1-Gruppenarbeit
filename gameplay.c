@@ -59,7 +59,7 @@ void generate_tetromino(tetromino *current_Tetromino //Struktur des aktuellen Te
     //Es wird zufällig eine Zahl (0-6) generiert, diese ist der Typ, dann werden einfach für den Typen die entsprechenden Koordinaten
     //in das Array geschrieben
 
-    current_Tetromino->type = 1 ; //GetRandomValue(0,6);
+    current_Tetromino->type = GetRandomValue(0,6);
 
     switch (current_Tetromino->type) {
         case 0:
