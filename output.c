@@ -58,7 +58,7 @@ void draw_init(){
     const int screenWidth = 800;
     const int screenHeight = 450;
     InitWindow(screenWidth, screenHeight, "Tetris");
-    SetTargetFPS(60);
+    SetTargetFPS(120);
 }
 
 //Bestimmen der Farbe

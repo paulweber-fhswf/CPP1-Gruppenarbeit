@@ -18,7 +18,6 @@ void move_tetromino(tetromino *current_Tetromino,
                     float y_dif, // Y Verschiebung
                     int *playfield // Array mit den liegenden Blöcken
 ){
-
     int check = 0; // Check Variable mit 0 initialisieren
 
     //Überprüfe, ob der Tetromino an die neue Stelle passt, wenn nicht, wird check auf 1 gesetzt und der Schritt der Koordinatenanpassung wird übersprungen
@@ -50,7 +49,6 @@ void move_tetromino(tetromino *current_Tetromino,
         current_Tetromino->Rotation_Point.x = current_Tetromino->Rotation_Point.x + x_dif;
         current_Tetromino->Rotation_Point.y = current_Tetromino->Rotation_Point.y + y_dif;
     }
-
 }
 
 
@@ -61,7 +59,7 @@ void generate_tetromino(tetromino *current_Tetromino //Struktur des aktuellen Te
     //Es wird zufällig eine Zahl (0-6) generiert, diese ist der Typ, dann werden einfach für den Typen die entsprechenden Koordinaten
     //in das Array geschrieben
 
-    current_Tetromino->type = GetRandomValue(0,6);
+    current_Tetromino->type = 1 ; //GetRandomValue(0,6);
 
     switch (current_Tetromino->type) {
         case 0:
@@ -139,6 +137,9 @@ void generate_tetromino(tetromino *current_Tetromino //Struktur des aktuellen Te
              *
              */
 
+            (current_Tetromino->Tetromino+3)->x = 5;
+            (current_Tetromino->Tetromino+3)->y = -2;
+
             (current_Tetromino->Tetromino+0)->x = 3;
             (current_Tetromino->Tetromino+0)->y = -1;
 
@@ -147,9 +148,6 @@ void generate_tetromino(tetromino *current_Tetromino //Struktur des aktuellen Te
 
             (current_Tetromino->Tetromino+2)->x = 5;
             (current_Tetromino->Tetromino+2)->y = -1;
-
-            (current_Tetromino->Tetromino+3)->x = 5;
-            (current_Tetromino->Tetromino+3)->y = -2;
 
             current_Tetromino->Rotation_Point.x = (float)4;
             current_Tetromino->Rotation_Point.y = (float)-1;
@@ -344,15 +342,15 @@ int clear_line(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos
 ){
 
     int clear; //Clear Variable initialisieren
+    int bottom_line = -20;
 
     //Die Reihen der jeweils 4 platzierten Blöcke überprüfen
     for (int i = 0; i < 4; ++i) {
-
         clear = 0;
 
         //Durch die Reihe des platzierten Blockes gehen und zählen wie viele Blöcke in dieser Reihe sind
         for(int x = 0; x < 10; ++x) {
-            if ( *(playfield +x+ ((int)(current_Tetromino->Tetromino+i)->y +20) *10) >=0){
+            if ( *(playfield +x+ ((int)(current_Tetromino->Tetromino+i)->y +20) *10) >= 0){
                 clear++;
             }
         }
@@ -366,15 +364,18 @@ int clear_line(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos
             }
 
             //Alle blöcke über dieser Reihe jeweils einen Block nach unten verschieben
-            for (int j = (int)(current_Tetromino->Tetromino+i)->y+20; j > 0; --j) {
+            for (int j = (int)(current_Tetromino->Tetromino+i)->y+20; j > 19; --j) {
                 for(int x = 0; x < 10; ++x) {
-                   *(playfield +x+ (j) *10) = *(playfield +x+ (j-1) *10);
+                    *(playfield + x + (j) * 10) = *(playfield + x + ((j-1) * 10));
                 }
             }
+
             //Zähler für vollständige Linien inkrementieren
             completed_lines++;
         }
     }
+
+
 
     return completed_lines;
 }
@@ -444,7 +445,7 @@ int main_game_loop(tetromino *current_Tetromino, //Struktur des aktuellen Tetrom
     player_1(current_Tetromino, playfield); //Eingabe Spieler 1 lesen
 
     //Tetromino nur fallen lassen, wenn genug Zeit vergangen ist
-    if(GetTime() > *old_time+0.2){
+    if(GetTime() > * old_time+0.2){
         check = drop_pice_1(current_Tetromino, playfield); //Tetromino 1 Block fallen lassen
         *old_time = GetTime(); //old_time speichert die Zeit des letzten fallen lassens
     }
@@ -453,11 +454,11 @@ int main_game_loop(tetromino *current_Tetromino, //Struktur des aktuellen Tetrom
     if(check == true) {
         for (int i = 0; i < 4; ++i) {
             //Den aktuell fallenden Tetromino in das Array der liegenden Blöcke kopieren
-            *(playfield + (int) (current_Tetromino->Tetromino + i)->x + (int) ((current_Tetromino->Tetromino + i)->y + 20) * 10) = current_Tetromino->type;
-
-            //Funktion zum Reihe leeren, bzw. die Überprüfung dafür starten
-            *completed_lines = clear_line(current_Tetromino, playfield);
+            *(playfield + (int)(current_Tetromino->Tetromino+i)->x + (int)((current_Tetromino->Tetromino + i)->y + 20) * 10) = current_Tetromino->type;
         }
+
+        //Funktion zum Reihe leeren, bzw. die Überprüfung dafür starten
+        *completed_lines = clear_line(current_Tetromino, playfield);
 
         *current_Tetromino = *next_Tetromino; //Inhalt des nächsten in den aktuellen Tetromino übergeben
         generate_tetromino(next_Tetromino); //Den nächsten Tetromino generieren
