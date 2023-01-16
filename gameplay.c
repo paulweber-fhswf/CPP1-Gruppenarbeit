@@ -445,7 +445,7 @@ int main_game_loop(tetromino *current_Tetromino, //Struktur des aktuellen Tetrom
     player_1(current_Tetromino, playfield); //Eingabe Spieler 1 lesen
 
     //Tetromino nur fallen lassen, wenn genug Zeit vergangen ist
-    if(GetTime() > * old_time+0.2){
+    if(GetTime() > * old_time){
         check = drop_pice_1(current_Tetromino, playfield); //Tetromino 1 Block fallen lassen
         *old_time = GetTime(); //old_time speichert die Zeit des letzten fallen lassens
     }

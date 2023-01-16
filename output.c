@@ -116,4 +116,18 @@ void game_over(int completed_lines
     ClearBackground(DARKGRAY);
     DrawText("Game Over", 270, 150, 50, RED);
     DrawText(TextFormat("Completed Lines: %4i", completed_lines), 290, 225, 20, RED);
+    DrawText("Continue with Enter/Return", 230, 300, 25, BLUE);
+    DrawText("Exit with ESC", 310, 330, 25, BLUE);
+
+}
+
+void draw_main_menu(){
+    ClearBackground(DARKGRAY);
+    DrawText("Tetris", 310, 50, 50, BLUE);
+    DrawText("Controls:\n Move Tetromino Left <-> Right with arrow keys \n Drop Tetromino faster with Arrow down \n Rotate 90° with X", 50, 150, 20, ORANGE);
+    DrawText("Continue with Enter/Return", 230, 300, 25, BLUE);
+    DrawText("Exit with ESC", 310, 330, 25, BLUE);
+
+    DrawText("Made by: Florian Bruchhage\n            Paul Weber", 650, 400, 10, ORANGE);
+
 }

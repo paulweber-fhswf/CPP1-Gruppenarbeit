@@ -19,32 +19,72 @@ int main()
     double old_time = GetTime(); //old_time mit der aktuellen Zeit initialisieren
     int *playfield = (int*) malloc (10 * 40 * sizeof(int)); // *(playfield + x + y * 10)
     int completed_lines = 0; //Zähler für die Zeilen die vervollständigt wurden
-    int end = 0; //Flag für das beenden
+    int end; //Flag für das beenden
+    int exit = 0;
+    int next = 0;
 
-    //Spielfeld "leeren"
-    for (int x = 0; x < 10; ++x) {
-        for (int y = 0; y < 40; ++y) {
-                *(playfield+x+y*10) = -1;
+
+
+
+
+    while(exit == 0){
+
+        while(next == 0 && exit == 0){
+            BeginDrawing(); //Ausgabe beginnen---------------
+            draw_main_menu();
+            EndDrawing(); //Ausgabe beenden------------------
+
+            //Beenden oder zum nächsten Fenster gehen
+            if(WindowShouldClose()){
+                exit = 1;
+            }
+            if (IsKeyPressed(KEY_ENTER)){
+                next = 1;
+            }
         }
-    }
 
-    //aktuellen und nächsten Tetromino generieren
-    generate_tetromino(&current_Tetromino);
-    generate_tetromino(&next_Tetromino);
+        //Alles für das nächste Spiel zurücksetzten
+        next = 0;
+        end = 0;
 
-    //Game loop solange laufen lassen, bis das Fenster geschlossen wird oder das Spiel zu Ende geht
-    while (!WindowShouldClose() && end==0)
-    {
-        BeginDrawing(); //Ausgabe beginnen---------------
-        end = main_game_loop(&current_Tetromino, &next_Tetromino, playfield, &completed_lines, &old_time);
-        EndDrawing(); //Ausgabe beenden------------------
-    }
+        //Spielfeld "leeren"
+        for (int x = 0; x < 10; ++x) {
+            for (int y = 0; y < 40; ++y) {
+                *(playfield+x+y*10) = -1;
+            }
+        }
 
-    //Game Over screen anzeigen bis ESC gedrückt wird
-    while(!WindowShouldClose()){
-        BeginDrawing(); //Ausgabe beginnen---------------
-        game_over(completed_lines);
-        EndDrawing(); //Ausgabe beenden------------------
+        //aktuellen und nächsten Tetromino generieren
+        generate_tetromino(&current_Tetromino);
+        generate_tetromino(&next_Tetromino);
+
+
+        while(exit == 0 && end == 0){
+            BeginDrawing(); //Ausgabe beginnen---------------
+            end = main_game_loop(&current_Tetromino, &next_Tetromino, playfield, &completed_lines, &old_time);
+            EndDrawing(); //Ausgabe beenden------------------
+
+            //Beenden
+            if(WindowShouldClose()){
+                exit = 1;
+            }
+        }
+
+        while(exit == 0 && next == 0){
+            BeginDrawing(); //Ausgabe beginnen---------------
+            game_over(completed_lines);
+            EndDrawing(); //Ausgabe beenden------------------
+
+            //Beenden oder zum nächsten Fenster gehen
+            if(WindowShouldClose()){
+                exit = 1;
+            }
+            if (IsKeyPressed(KEY_ENTER)){
+                next = 1;
+            }
+        }
+
+        next = 0;
     }
 
     //Speicherbereiche freigeben

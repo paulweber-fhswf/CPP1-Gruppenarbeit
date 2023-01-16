@@ -42,4 +42,6 @@ void game_over(int completed_lines);
 //Autor: Paul Weber
 void draw_init();
 
+void draw_main_menu();
+
 #endif //TETRIS_OUTPUT_H
