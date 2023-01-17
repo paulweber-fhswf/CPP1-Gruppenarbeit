@@ -54,12 +54,19 @@ void move_tetromino(tetromino *current_Tetromino,
 
 //Funktion um einen zufälligen Tetronimino an der richtigen Stelle zu platzieren
 //Autor: Steffanie Wille, Paul Weber
-void generate_tetromino(tetromino *current_Tetromino //Struktur des aktuellen Tetrominos initialisieren
+void generate_tetromino(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos initialisieren
+                        int pre_type
 ){
     //Es wird zufällig eine Zahl (0-6) generiert, diese ist der Typ, dann werden einfach für den Typen die entsprechenden Koordinaten
     //in das Array geschrieben
 
-    current_Tetromino->type = GetRandomValue(0,6);
+    if(pre_type < 0){
+        current_Tetromino->type = GetRandomValue(0,6);
+    }
+    else{
+        current_Tetromino->type = pre_type;
+    }
+
 
     switch (current_Tetromino->type) {
         case 0:
@@ -435,17 +442,19 @@ void rotation(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos
 //Autor: Paul Weber
 int main_game_loop(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos
                    tetromino *next_Tetromino, //Struktur des nächsten Tetrominos
+                   tetromino *hold_Tetromino,
                    int *playfield, //Array mit den liegenden Blöcken
                    int *completed_lines, //Anzahl der beendeten Reihen
-                   double *old_time //Zeit des letzten Fallens
+                   double *old_time, //Zeit des letzten Fallens
+                   int *hold_allow
 ){
     int end = 0; //Variable für das Beenden mit 0 initialisieren
     bool check = false; //Variable für das Aufliegen von Blöcken
 
-    player_1(current_Tetromino, playfield); //Eingabe Spieler 1 lesen
+    player_1(current_Tetromino, next_Tetromino, hold_Tetromino, playfield, hold_allow); //Eingabe Spieler 1 lesen
 
     //Tetromino nur fallen lassen, wenn genug Zeit vergangen ist
-    if(GetTime() > * old_time){
+    if(GetTime() > 0.2+ *old_time){
         check = drop_pice_1(current_Tetromino, playfield); //Tetromino 1 Block fallen lassen
         *old_time = GetTime(); //old_time speichert die Zeit des letzten fallen lassens
     }
@@ -461,7 +470,7 @@ int main_game_loop(tetromino *current_Tetromino, //Struktur des aktuellen Tetrom
         *completed_lines = clear_line(current_Tetromino, playfield);
 
         *current_Tetromino = *next_Tetromino; //Inhalt des nächsten in den aktuellen Tetromino übergeben
-        generate_tetromino(next_Tetromino); //Den nächsten Tetromino generieren
+        generate_tetromino(next_Tetromino, -1); //Den nächsten Tetromino generieren
 
         //Wenn ein Tetromino über 20 Zeilen geht, wird das Spiel beendet
         for (int x = 0; x < 10; ++x) {
@@ -469,17 +478,41 @@ int main_game_loop(tetromino *current_Tetromino, //Struktur des aktuellen Tetrom
                 end = 1;
             }
         }
+
+        *hold_allow = 1;
     }
 
     //Alle Ausgaben aufrufen
-    ClearBackground(DARKGRAY);
+    ClearBackground(BLACK);
     draw_output(current_Tetromino);
     show_next_tetromino(next_Tetromino);
     draw_completed_lines(*completed_lines);
+    draw_hold(hold_Tetromino);
     draw_playfield(playfield);
 
     return end; //Spielzustand zurück geben
 }
 
+bool hold_function(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos
+          tetromino *next_Tetromino, //Struktur des nächsten Tetrominos
+          tetromino *hold_Tetromino
+){
+    tetromino temp;
+
+    if(hold_Tetromino->type == -1){
+        *hold_Tetromino = *current_Tetromino;
+        *current_Tetromino = *next_Tetromino;
+        generate_tetromino(next_Tetromino, -1);
+        generate_tetromino(hold_Tetromino, hold_Tetromino->type);
+    }
+    else{
+        temp = *hold_Tetromino;
+        generate_tetromino(hold_Tetromino, current_Tetromino->type);
+        generate_tetromino(current_Tetromino, temp.type);
+    }
+
+
+    return true;
+}
 
 

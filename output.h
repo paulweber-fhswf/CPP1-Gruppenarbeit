@@ -44,4 +44,6 @@ void draw_init();
 
 void draw_main_menu();
 
+void draw_hold(tetromino *hold_Tetromino);
+
 #endif //TETRIS_OUTPUT_H

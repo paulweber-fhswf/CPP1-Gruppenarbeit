@@ -16,16 +16,14 @@ int main()
 
     tetromino current_Tetromino; //Struktur des aktuellen Tetrominos initialisieren
     tetromino next_Tetromino; //Struktur des aktuellen Tetrominos initialisieren
+    tetromino hold_Tetromino;
     double old_time = GetTime(); //old_time mit der aktuellen Zeit initialisieren
     int *playfield = (int*) malloc (10 * 40 * sizeof(int)); // *(playfield + x + y * 10)
     int completed_lines = 0; //Zähler für die Zeilen die vervollständigt wurden
     int end; //Flag für das beenden
     int exit = 0;
     int next = 0;
-
-
-
-
+    int hold_allow = 1;
 
     while(exit == 0){
 
@@ -55,13 +53,14 @@ int main()
         }
 
         //aktuellen und nächsten Tetromino generieren
-        generate_tetromino(&current_Tetromino);
-        generate_tetromino(&next_Tetromino);
+        generate_tetromino(&current_Tetromino, -1);
+        generate_tetromino(&next_Tetromino, -1);
 
+        hold_Tetromino.type = -1;
 
         while(exit == 0 && end == 0){
             BeginDrawing(); //Ausgabe beginnen---------------
-            end = main_game_loop(&current_Tetromino, &next_Tetromino, playfield, &completed_lines, &old_time);
+            end = main_game_loop(&current_Tetromino, &next_Tetromino, &hold_Tetromino, playfield, &completed_lines, &old_time, &hold_allow);
             EndDrawing(); //Ausgabe beenden------------------
 
             //Beenden

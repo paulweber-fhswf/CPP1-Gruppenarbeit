@@ -19,7 +19,8 @@ void move_tetromino(tetromino *current_Tetromino, //Struktur des aktuellen Tetro
 
 //Funktion um einen zufälligen Tetronimino an der richtigen Stelle zu platzieren
 //Autor: Steffanie Wille, Paul Weber
-void generate_tetromino(tetromino *current_Tetromino //Struktur des aktuellen Tetrominos
+void generate_tetromino(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos initialisieren
+                        int pre_type
 );
 
 //Funktion um ein Tetromino einen Block fallen zu lassen
@@ -47,8 +48,16 @@ void rotation(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos
 //Autor: Paul Weber
 int main_game_loop(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos
                    tetromino *next_Tetromino, //Struktur des nächsten Tetrominos
+                   tetromino *hold_Tetromino,
                    int *playfield, //Array mit den liegenden Blöcken
                    int *completed_lines, //Anzahl der beendeten Reihen
-                   double *old_time //Zeit des letzten Fallens
+                   double *old_time, //Zeit des letzten Fallens
+                   int *hold_allow
 );
+
+bool hold_function(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos
+          tetromino *next_Tetromino, //Struktur des nächsten Tetrominos
+          tetromino *hold_Tetromino
+);
+
 #endif //TETRIS_GAMEPLAY_H
