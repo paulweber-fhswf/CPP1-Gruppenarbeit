@@ -23,18 +23,18 @@ Wenn ein Teromino außerhalb des Spielfeldes ragt, wird zum Game Over Menü weit
 Unter Releases sind Ausführbare Datein für Linux, macOS und Windows zu finden, diese sind ohne raylib ausführbar und müssen nicht selber kompelliert werden.
 
 
-# Kompellieren
+# Kompilieren
 
-Anweisungen um das Projekt unter Linux, macOS und Windows selber zu kompellieren
+Anweisungen um das Projekt unter Linux, macOS und Windows selber zu kompilieren
 
 ## Linux / macOS
 
 ### Vorbereitung
 
-Für das Kompelieren ist Raylib zwingend benötigt, unter Linux und macOS kann diese Bibliothek über einen Paketmanager installiert werden. 
+Für das Kompilieren ist Raylib zwingend benötigt, unter Linux und macOS kann diese Bibliothek über einen Paketmanager installiert werden. 
 Diese [Konfiguration](https://github.com/SjDuque/Raylib-CMake) wurde für die CMakeLists.txt genutzt.
 
-### Spiel kompellieren
+### Spiel kompilieren
 
 ```
 git clone https://github.com/paulweber-fhswf/CPP1-Gruppenarbeit
