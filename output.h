@@ -42,4 +42,16 @@ void game_over(int completed_lines);
 //Autor: Paul Weber
 void draw_init();
 
+//Funktion um das Hauptmenü darzustellen
+//Autor: Paul Weber
+void draw_main_menu();
+
+//Funktion um den hold Tetromino zu zeichnen
+//Autor: Paul Weber
+void draw_hold(tetromino *hold_Tetromino);
+
+//Funktion um den Pausezustand zu zeigen
+//Autor: Paul Weber
+void draw_pause();
+
 #endif //TETRIS_OUTPUT_H

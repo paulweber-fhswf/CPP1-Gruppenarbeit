@@ -113,7 +113,38 @@ void draw_completed_lines(int completed_lines
 //Autor: Florian Bruchhage, Paul Weber
 void game_over(int completed_lines
 ){
-    ClearBackground(DARKGRAY);
-    DrawText("Game Over", 270, 150, 50, RED);
-    DrawText(TextFormat("Completed Lines: %4i", completed_lines), 290, 225, 20, RED);
+    ClearBackground(BLACK);
+    DrawText("Game Over", 270, 150, 50, WHITE);
+    DrawText(TextFormat("Completed Lines: %4i", completed_lines), 290, 225, 20, WHITE);
+    DrawText("Continue with Enter/Return", 230, 300, 25, WHITE);
+    DrawText("Exit with ESC", 310, 330, 25, WHITE);
+
+}
+
+//Funktion um das Hauptmenü darzustellen
+//Autor: Paul Weber
+void draw_main_menu(){
+    ClearBackground(BLACK);
+    DrawText("Tetris", 310, 50, 50, BLUE);
+    DrawText("Controls:\n Move Tetromino Left <-> Right with arrow keys \n Drop Tetromino faster with Arrow down \n Rotate 90° with X \n Hold with C \n Pause with P", 50, 150, 20, WHITE);
+    DrawText("Continue with Enter/Return", 230, 300, 25, WHITE);
+    DrawText("Exit with ESC", 310, 330, 25, WHITE);
+
+    DrawText("Made by: Florian Bruchhage\n            Paul Weber", 650, 400, 10, WHITE);
+}
+
+//Funktion um den hold Tetromino zu zeichnen
+//Autor: Paul Weber
+void draw_hold(tetromino *hold_Tetromino){
+    DrawText("Hold:", 600, 100, 20, BLUE);
+
+    for (int i = 0; i < 4; ++i) {
+        DrawRectangle((hold_Tetromino->Tetromino+i)->x * scale + 570, (hold_Tetromino->Tetromino+i)->y * scale + 200, scale, scale, get_color(hold_Tetromino->type));
+    }
+}
+
+//Funktion um den Pausezustand zu zeigen
+//Autor: Paul Weber
+void draw_pause(){
+    DrawText("Pause", 325, 150, 50, ORANGE);
 }
