@@ -31,7 +31,7 @@ Anweisungen um das Projekt unter Linux, macOS und Windows selber zu kompilieren
 
 ### Vorbereitung
 
-Für das Kompilieren ist Raylib zwingend benötigt, unter Linux und macOS kann diese Bibliothek über einen Paketmanager installiert werden. 
+Für das Kompilieren ist Raylib zwingend benötigt, unter Linux und macOS kann diese Bibliothek über einen Paketmanager installiert werden, genaue Dokumentation hierzu ist auf der RayLib Homepage zu finden. 
 Diese [Konfiguration](https://github.com/SjDuque/Raylib-CMake) wurde für die CMakeLists.txt genutzt.
 
 ### Spiel kompilieren
