@@ -55,11 +55,12 @@ void move_tetromino(tetromino *current_Tetromino,
 //Funktion um einen zufälligen Tetronimino an der richtigen Stelle zu platzieren
 //Autor: Steffanie Wille, Paul Weber
 void generate_tetromino(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos initialisieren
-                        int pre_type
+                        int pre_type //-1 für einen zufälligen Typ, 0-6 um einen bestimmten Typen neu zu erstellen
 ){
     //Es wird zufällig eine Zahl (0-6) generiert, diese ist der Typ, dann werden einfach für den Typen die entsprechenden Koordinaten
     //in das Array geschrieben
 
+    //Falls ein pre Type angegeben wurde, wird dieser Tetromino neu erstellt, also alle Blöcke und der Rotation point werden auf den Standardwert gesetzt
     if(pre_type < 0){
         current_Tetromino->type = GetRandomValue(0,6);
     }
@@ -442,44 +443,56 @@ void rotation(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos
 //Autor: Paul Weber
 int main_game_loop(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos
                    tetromino *next_Tetromino, //Struktur des nächsten Tetrominos
-                   tetromino *hold_Tetromino,
+                   tetromino *hold_Tetromino, //Struktur des hold Tetrominos
                    int *playfield, //Array mit den liegenden Blöcken
                    int *completed_lines, //Anzahl der beendeten Reihen
                    double *old_time, //Zeit des letzten Fallens
-                   int *hold_allow
+                   int *hold_allow, //Check ob der aktuelle Tetromino mit Hold getauscht werden darf
+                   int *pause //Pause Zustand
 ){
     int end = 0; //Variable für das Beenden mit 0 initialisieren
     bool check = false; //Variable für das Aufliegen von Blöcken
 
-    player_1(current_Tetromino, next_Tetromino, hold_Tetromino, playfield, hold_allow); //Eingabe Spieler 1 lesen
 
-    //Tetromino nur fallen lassen, wenn genug Zeit vergangen ist
-    if(GetTime() > 0.2+ *old_time){
-        check = drop_pice_1(current_Tetromino, playfield); //Tetromino 1 Block fallen lassen
-        *old_time = GetTime(); //old_time speichert die Zeit des letzten fallen lassens
-    }
+    if(*pause == 0){
+        player_1(current_Tetromino, next_Tetromino, hold_Tetromino, playfield, hold_allow, pause); //Eingabe Spieler 1 lesen
 
-    //Wenn der Tetromino mit einem Block oder den Boden kollidiert
-    if(check == true) {
-        for (int i = 0; i < 4; ++i) {
-            //Den aktuell fallenden Tetromino in das Array der liegenden Blöcke kopieren
-            *(playfield + (int)(current_Tetromino->Tetromino+i)->x + (int)((current_Tetromino->Tetromino + i)->y + 20) * 10) = current_Tetromino->type;
+        //Tetromino nur fallen lassen, wenn genug Zeit vergangen ist
+        if(GetTime() > 0.2+ *old_time){
+            check = drop_pice_1(current_Tetromino, playfield); //Tetromino 1 Block fallen lassen
+            *old_time = GetTime(); //old_time speichert die Zeit des letzten fallen lassens
         }
 
-        //Funktion zum Reihe leeren, bzw. die Überprüfung dafür starten
-        *completed_lines = clear_line(current_Tetromino, playfield);
-
-        *current_Tetromino = *next_Tetromino; //Inhalt des nächsten in den aktuellen Tetromino übergeben
-        generate_tetromino(next_Tetromino, -1); //Den nächsten Tetromino generieren
-
-        //Wenn ein Tetromino über 20 Zeilen geht, wird das Spiel beendet
-        for (int x = 0; x < 10; ++x) {
-            if (*(playfield + x + 19 * 10) >= 0) {
-                end = 1;
+        //Wenn der Tetromino mit einem Block oder den Boden kollidiert
+        if(check == true) {
+            for (int i = 0; i < 4; ++i) {
+                //Den aktuell fallenden Tetromino in das Array der liegenden Blöcke kopieren
+                *(playfield + (int)(current_Tetromino->Tetromino+i)->x + (int)((current_Tetromino->Tetromino + i)->y + 20) * 10) = current_Tetromino->type;
             }
-        }
 
-        *hold_allow = 1;
+            //Funktion zum Reihe leeren, bzw. die Überprüfung dafür starten
+            *completed_lines = clear_line(current_Tetromino, playfield);
+
+            *current_Tetromino = *next_Tetromino; //Inhalt des nächsten in den aktuellen Tetromino übergeben
+            generate_tetromino(next_Tetromino, -1); //Den nächsten Tetromino generieren
+
+            //Wenn ein Tetromino über 20 Zeilen geht, wird das Spiel beendet
+            for (int x = 0; x < 10; ++x) {
+                if (*(playfield + x + 19 * 10) >= 0) {
+                    end = 1;
+                }
+            }
+
+            *hold_allow = 1; //am Ende des Spielzuges hold wieder erlauben
+        }
+    }
+    //Falls P gedrückt wurde, hier immer überprüfen ob P noch einmal gedrückt wurde und einen Text ausgeben
+    else{
+        draw_pause();
+
+        if(IsKeyPressed(KEY_P)){
+            *pause = 0;
+        }
     }
 
     //Alle Ausgaben aufrufen
@@ -493,26 +506,28 @@ int main_game_loop(tetromino *current_Tetromino, //Struktur des aktuellen Tetrom
     return end; //Spielzustand zurück geben
 }
 
-bool hold_function(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos
-          tetromino *next_Tetromino, //Struktur des nächsten Tetrominos
-          tetromino *hold_Tetromino
+//Ablage für einen Tetromino, tauscht mit dem aktuellen Tetromino
+//Autor: Paul Weber
+void hold_function(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos
+                   tetromino *next_Tetromino, //Struktur des nächsten Tetrominos
+                   tetromino *hold_Tetromino //Struktur des hold Tetrominos
 ){
     tetromino temp;
 
+    //Wenn noch kein Typ in hold ist, aktuell->hold, next->current und next neu generieren
     if(hold_Tetromino->type == -1){
         *hold_Tetromino = *current_Tetromino;
         *current_Tetromino = *next_Tetromino;
         generate_tetromino(next_Tetromino, -1);
         generate_tetromino(hold_Tetromino, hold_Tetromino->type);
     }
+
+    //Falls bereits ein Tetromino in Hold liegt, diesen mit dem aktuellen tauschen
     else{
         temp = *hold_Tetromino;
         generate_tetromino(hold_Tetromino, current_Tetromino->type);
         generate_tetromino(current_Tetromino, temp.type);
     }
-
-
-    return true;
 }
 
 
