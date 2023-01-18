@@ -23,7 +23,7 @@ void draw_output(tetromino *current_Tetromino //Struktur des aktuellen Tetromino
 //Autor: Paul Weber
 void show_next_tetromino(tetromino *current_Tetromino //Struktur des aktuellen Tetrominos
 ){
-    DrawText("Next Piece:", 10, 10, 20, BLUE);
+    DrawText("Next Piece:", 40, 10, 20, BLUE);
 
     for (int i = 0; i < 4; ++i) {
         DrawRectangle((current_Tetromino->Tetromino+i)->x * scale, (current_Tetromino->Tetromino+i)->y * scale + 100, scale, scale, get_color(current_Tetromino->type));
@@ -114,29 +114,34 @@ void draw_completed_lines(int completed_lines
 void game_over(int completed_lines
 ){
     ClearBackground(BLACK);
-    DrawText("Game Over", 270, 150, 50, WHITE);
+    DrawText("Game Over", 270, 150, 50, RED);
     DrawText(TextFormat("Completed Lines: %4i", completed_lines), 290, 225, 20, WHITE);
-    DrawText("Continue with Enter/Return", 230, 300, 25, WHITE);
-    DrawText("Exit with ESC", 310, 330, 25, WHITE);
+    DrawText("Continue with Enter/Return", 230, 300, 25, YELLOW);
+    DrawText("Exit with ESC", 310, 330, 25, MAROON);
 
 }
 
 //Funktion um das Hauptmenü darzustellen
-//Autor: Paul Weber
+//Autor: Paul Weber, (Farben: Florian Bruchhage)
 void draw_main_menu(){
     ClearBackground(BLACK);
-    DrawText("Tetris", 310, 50, 50, BLUE);
+    DrawText("T", 280, 30, 50, SKYBLUE);
+    DrawText("E", 320,30,50,GREEN);
+    DrawText("T", 355,30,50,BLUE);
+    DrawText("R", 395,30,50,PURPLE);
+    DrawText("I", 430,30,50,ORANGE);
+    DrawText("S", 450,30,50,RED);
     DrawText("Controls:\n Move Tetromino Left <-> Right with arrow keys \n Drop Tetromino faster with Arrow down \n Rotate 90° with X \n Hold with C \n Pause with P", 50, 150, 20, WHITE);
-    DrawText("Continue with Enter/Return", 230, 300, 25, WHITE);
-    DrawText("Exit with ESC", 310, 330, 25, WHITE);
+    DrawText("Continue with Enter/Return", 230, 370, 25, YELLOW);
+    DrawText("Exit with ESC", 310, 400, 25, MAROON);
 
-    DrawText("Made by: Florian Bruchhage\n            Paul Weber", 650, 400, 10, WHITE);
+    DrawText("Made by: Florian Bruchhage\n            Paul Weber", 650, 420, 10, WHITE);
 }
 
 //Funktion um den hold Tetromino zu zeichnen
 //Autor: Paul Weber
 void draw_hold(tetromino *hold_Tetromino){
-    DrawText("Hold:", 600, 100, 20, BLUE);
+    DrawText("Hold:", 645, 130, 20, BLUE);
 
     for (int i = 0; i < 4; ++i) {
         DrawRectangle((hold_Tetromino->Tetromino+i)->x * scale + 570, (hold_Tetromino->Tetromino+i)->y * scale + 200, scale, scale, get_color(hold_Tetromino->type));
