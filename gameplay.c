@@ -350,7 +350,6 @@ int clear_line(tetromino *current_Tetromino, //Struktur des aktuellen Tetrominos
 ){
 
     int clear; //Clear Variable initialisieren
-    int bottom_line = -20;
 
     //Die Reihen der jeweils 4 platzierten Blöcke überprüfen
     for (int i = 0; i < 4; ++i) {
