@@ -20,8 +20,7 @@ Wenn ein Teromino außerhalb des Spielfeldes ragt, wird zum Game Over Menü weit
 
 # Selber spielen
 
-Unter Releases sind Ausführbare Datein für Linux, macOS und Windows zu finden, diese sind ohne raylib ausführbar und müssen nicht selber kompelliert werden.
-
+Unter Releases sind Ausführbare Datein für Linux, macOS und Windows zu finden, diese benötigen aber eine installation von Raylib.
 
 # Kompilieren
 
